@@ -1,0 +1,276 @@
+html，body{
+    margin: 0;
+    padding: 0;
+}
+.huaweiclound{
+width: 100%;
+height: 100%;
+}
+.huaweiclound-top{
+    position: relative;
+    z-index: 2;
+    height: 50px;
+    border-bottom: 1px solid hsla(0,0%,100%,.1);
+    font-size: 14px;
+    color: #a0a2a8;
+    -webkit-transition: top .3s ease-out,background-color .3s;
+    transition: top .3s ease-out,background-color .3s;
+}
+.huaweiclound-logo {
+    float: left;
+    position: relative;
+    height: 32px;
+    width: 104px;
+    line-height: 32px;
+    left: -84px;
+    top: 9px;
+}
+
+
+.huaweiclound-logo a {
+    display: block;
+    height: 32px;
+    width: 104px;
+    background-size: cover;
+    line-height: 32px;
+}
+.huaweiclound-logo a>img {
+    width: 104px;
+    height: 32px;
+}
+.huaweiclound-nav {
+    float: right;
+    width: 646px;
+    height: 49px;
+}
+.huaweiclound-nav-left {
+    width: 646px;
+    height: 49px;
+}
+.huaweiclound-nav-sou {
+    width: 100%;
+    height: 61px;
+}
+
+.huaweiclound-nav-sou ul>li>form>input{
+    height: 32px;
+    width: 141px;
+    padding-left: 15px;
+    padding-right: 44px;
+    border: none;
+    outline: none;
+    background: rgba(87,93,108,.08);
+    font-size: 14px;
+    line-height: 20px;
+    color: #252b3a;
+}
+.huaweiclound-nav-sou ul{
+    width: 100%;
+    height: 61px;
+    position: relative;
+    left: -44px;
+}
+.huaweiclound-nav-sou ul>li>form>button{
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    width: 18px;
+    height: 18px;
+    padding: 1px;
+    margin-top: -9px;
+    border: none;
+    background-color: transparent;
+    color: #575d6c;
+    line-height: 0;
+    transition: .2s;
+}
+
+
+
+.huaweiclound-nav-sou ul>li {
+    float: left;
+    margin-left: 32px;
+    line-height: 50px;
+    color: #333333;
+    font-size: 14px;
+}
+.huaweiclound-nav-sou ul>li>a{
+    display: block;
+    font-size: 14px;
+}
+.huaweiclound-nav-sou .ce {
+    position: relative;
+    background-color: #c7000b;
+    width: 60px;
+    height: 32px;
+    text-align: center;
+    line-height: 32px;
+    margin-left: 0;
+    left: 32px;
+    top: 10px;
+    font-size: 14px;
+}       
+.huaweiclound-nav-sou .ce>a{
+    color: #fff;
+}
+
+.huaweiclound-nav-sou #deng {
+    color: red;
+}
+.huaweiclound-nav-sou .jian {
+    display: inline-block;
+    position: relative;
+    top: -48px;
+    width: 12px;
+    height: 12px;
+    margin-left: 48px;
+    background: url(../img/jian.png);
+    background-size: 100% 100%;
+    transform: rotateX(0deg);
+}
+.heard {
+    display: inline-block;
+    font-size: 14px;
+}
+.chinese-s {
+    display: none;
+    position: absolute;
+    top: calc(100% + 12px);
+    min-width: 100%;
+    width: 140px;
+    padding: 4px 16px;
+    background: #fff;
+}
+.chinese-s .hread-Tnter {
+    height: 22px;
+    line-height: 22px;
+    color: rgba(37,43,58,.6);
+    font-size: 14px;
+    width: 82px;
+    margin-bottom: 8px;
+}
+.chinese-s .hread-ul{
+    position: relative;
+}
+.chinese-s .hread-ul-item {
+    position: relative;
+}
+.huaweiclound-bottom {
+    width: 1737px;
+    height: 50px;
+}
+.huaweiclound-bottom ul{
+    width: 1000px;
+    height: 100%;
+    position: relative;
+    float: left;
+    z-index: 1;
+    margin-left: -22px;
+    height: 50px;
+    overflow: hidden;
+}
+.huaweiclound-bottom ul>li{
+    float: left;
+    line-height: 50px;
+}
+.huaweiclound-bottom ul>li>a{
+    display: block;
+    padding: 10px 21px;
+    font-size: 14px;
+    line-height: 30px;
+    color: #252b3a;
+    position: relative;
+}
+.container ul>li>a> .g {
+    position: relative;
+    top: 10px;
+    width: 12px;
+    height: 12px;
+    left: 15px;
+    background: url(../img/jian.png);
+    background-size: 15px 15px;
+    background-position: -15px -15px;
+}
+.bei{
+    width: 100%;
+    height: 100%;
+
+}
+.bei a>img{
+    width: 100%;
+    height: 100%;
+}
+.bei-big{
+    position: relative;
+}
+.bei-big h1{
+    position: absolute;
+    top: -311px;
+    left: 240px;
+    font-size: 60px;
+}
+.bei-big p {
+    position: absolute;
+    top: -211px;
+    left: 255px;
+    font-size: 20px;
+}
+.btn button {
+    position: absolute;
+    top: -162px;
+    left: 253px;
+    font-size: 14px;
+    width: 118px;
+    height: 38px;
+    background-color: #dbe9f6;
+    border: 1px solid #333333;
+
+}
+.bei-big .btn a>img{
+    width: 430px;
+    height: 510px;
+    position: absolute;
+    top: -460px;
+    right: 375px;
+    transition: 0.5s;
+}
+.box{
+    width: 100%;
+    height: 100%;
+
+}
+.box1{
+    position: absolute;
+    width: 310px;
+    height: 80px;
+    background-color: red;
+    top: 490px;
+    right: 350px;
+}
+.box1 h2 {
+    width: 20px;
+}
+.box2{
+    position: absolute;
+    width: 310px;
+    height: 80px;
+    background-color: pink;
+    top: 490px;
+    right: 680px;
+}
+.box3{
+    position: absolute;
+    width: 310px;
+    height: 80px;
+    background-color: blue;
+    top: 490px;
+    right: 1340px;
+}
+.box4{
+    position: absolute;
+    width: 310px;
+    height: 80px;
+    background-color: yellow;
+    top: 490px;
+    right: 1010px;
+}
