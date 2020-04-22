@@ -1,7 +1,7 @@
-// 中国站下拉
-$('.station').mouseenter(function(){
-    $('#ul').show()
+中国站下拉
+$('.hread .chinese-s').click(function(){
+    $('.hread .hread-ul-item').show()
 })
-$('.station').mouseleve(function(){
-    $('#ul').hide()
+$('.hread .chinese-s').toggleClass(function(){
+    $('.hread .hread-ul-item').show()
 })

@@ -1,0 +1,41 @@
+var _idleSecondsCounter = 1;
+document.onclick = function() {
+	_idleSecondsCounter = 0;
+};
+document.onmousemove = function() {
+	_idleSecondsCounter = 0;
+};
+document.onkeypress = function() {
+	_idleSecondsCounter = 0;
+};
+
+function touchIAM() {
+  var touchUrl = "https://portal.huaweicloud.com/rest/heartbeat"
+  $.ajax({
+	type:'get',
+	url:touchUrl,
+	xhrFields:{
+      withCredentials:true
+    },
+    crossDomain:true,
+	timeout: 6e4,
+	success:function(data){
+		console.log("succ" + data)
+	},
+	error:function(data){
+		console.log("err" + data)
+	}
+  });
+}
+
+//touchIAM(); 
+window.setInterval(CheckIdleTime, 3e5); //5min3e5
+function CheckIdleTime() {
+	//5min֮�ڼ�⵽������5minʱ����
+	if(_idleSecondsCounter == 0){
+		//�����е��������������¼�,��������
+		touchIAM();
+	}
+	_idleSecondsCounter++;
+	
+}

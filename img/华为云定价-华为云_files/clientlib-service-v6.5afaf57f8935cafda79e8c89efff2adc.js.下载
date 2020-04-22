@@ -1,0 +1,2259 @@
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./components/service/main.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./base/framework/framework.js":
+/*!*************************************!*\
+  !*** ./base/framework/framework.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+// AGrid 设置相同高度
+/* 组件：弹性高度盒子
+ * 依赖：$.throttle
+ =================*/
+!function ($) {
+    'use strict';
+
+    // FLEX CLASS DEFINITION
+    // =====================
+
+    function FlexHeight($items) {
+        var that = this;
+        this.autoEqual = true;
+        this.$items = $items;
+        this.equal();
+        if ($.throttle) {
+            $(window).resize($.throttle(function () {
+                that.equal();
+            }));
+        } else {
+            $(window).resize(function () {
+                that.equal();
+            });
+        }
+    }
+
+    FlexHeight.prototype.equal = function () {
+        if (!this.autoEqual) return;
+        var maxHeight = 0;
+        this.$items
+            .height('')
+            .each(function () {
+                var height = $(this).height();
+                if (maxHeight < height) {
+                    maxHeight = height;
+                }
+            })
+            .height(maxHeight);
+    };
+
+    FlexHeight.prototype.auto = function (param) {
+        if (param === undefined || this.autoEqual == param) {
+            return;
+        }
+
+        this.autoEqual = !!param;
+
+        if (this.autoEqual) {
+            this.equal();
+        } else {
+            this.$items.height('');
+        }
+
+    };
+
+    // FLEX_HEIGHT PLUGIN DEFINITION
+    // =============================
+
+    var old = $.fn.flexHeight;
+
+    $.fn.flexHeight = function (option, param) {
+        return this.each(function () {
+            var $this = $(this);
+            var $items;
+            var data = $this.data('hw.flexHeight');
+
+            if (!data) {
+                if (option && option.items) {
+                    $items = $this.find(option.items);
+                } else {
+                    $items = $this.children('.flex-item');
+                }
+                $this.data('hw.flexHeight', new FlexHeight($items));
+            }
+
+            if (typeof option == 'string') {
+                data[option](param);
+            }
+        });
+    };
+
+    $.fn.flexHeight.Constructor = FlexHeight;
+
+
+    // FLEX_HEIGHT NO CONFLICT
+    // =======================
+
+    $.fn.flexHeight.noConflict = function () {
+        $.fn.flexHeight = old;
+        return this;
+    };
+
+
+    // FLEX_HEIGHT AUTO INIT
+    // =====================
+
+    $(document).ready(function () {
+        $('[data-toggle="flexHeight"]').flexHeight();
+    });
+
+}(jQuery);
+
+
+/* 工具：函数节流
+ ==============*/
+!function ($) {
+    'use strict';
+
+    $.throttle = function ( fn, interval ) {
+        var __self = fn, // 保存需要被延迟执行的函数引用
+            timer, // 定时器
+            firstTime = true; // 是否是第一次调用
+        interval = interval || 150;
+        return function () {
+            var args = arguments,
+                __me = this;
+            if ( firstTime ) { // 如果是第一次调用，不需延迟执行
+                __self.apply(__me, args);
+                return firstTime = false;
+            }
+            if ( timer ) { // 如果定时器还在，说明前一次延迟执行还没有完成
+                return false;
+            }
+            timer = setTimeout(function () { // 延迟一段时间执行
+                clearTimeout(timer);
+                timer = null;
+                __self.apply(__me, args);
+            }, interval);
+        };
+    };
+
+}(jQuery);
+
+/***/ }),
+
+/***/ "./base/ui/index.js":
+/*!**************************!*\
+  !*** ./base/ui/index.js ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(/*! ./js/tab */ "./base/ui/js/tab.js");
+__webpack_require__(/*! ./js/select */ "./base/ui/js/select.js");
+__webpack_require__(/*! ./js/collapse */ "./base/ui/js/collapse.js");
+
+/***/ }),
+
+/***/ "./base/ui/index.less":
+/*!****************************!*\
+  !*** ./base/ui/index.less ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./base/ui/js/collapse.js":
+/*!********************************!*\
+  !*** ./base/ui/js/collapse.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var util = __webpack_require__(/*! ./util */ "./base/ui/js/util.js");
+
+// 构造函数
+var Collapse = function (element) {
+    var that = this;
+    this.isTransitioning = false;
+    this.$element = $(element);
+
+    this.$triggers = $('[data-toggle="v6-collapse"]').filter(function () {
+        var $this = $(this);
+        var $target_default = $this.closest('.v6-collapse-container').children('.v6-collapse');
+
+        if ($target_default.length > 0 && $target_default.get(0) === that.$element.get(0)) {
+            return true;
+        }
+
+        var targetSelector = $this.attr('data-target') || $this.attr('href');
+
+        if ($(targetSelector).toArray().indexOf(that.$element.get(0)) !== -1) {
+            return true;
+        }
+    });
+};
+
+Collapse.prototype.show = function () {
+    var that = this;
+
+    if (this.isTransitioning ||
+        this.$element.hasClass('show')) {
+        return;
+    }
+
+    this.isTransitioning = true;
+
+    this.$triggers.addClass('expended');
+
+    this.$element
+        .trigger('beforeShow')
+        .removeClass('v6-collapse')
+        .addClass('collapsing');
+
+    var contentHeight = this.$element.get(0).scrollHeight;
+    var transitionDuration = util.getTransitionDurationFromElement(this.$element.get(0));
+
+    this.$element
+        .height(contentHeight)
+        .trigger('beginShow')
+        .one('transitionend', function () {
+            that.isTransitioning = false;
+            $(this)
+                .removeClass('collapsing')
+                .addClass('v6-collapse')
+                .addClass('show')
+                .height('')
+                .trigger('shown');
+
+        })
+        .transitionEndEmulator(transitionDuration)
+        .trigger('afterShow');
+};
+
+Collapse.prototype.hide = function () {
+    var that = this;
+
+    if (this.isTransitioning ||
+        !this.$element.hasClass('show')) {
+        return;
+    }
+
+    this.isTransitioning = true;
+
+    this.$triggers.removeClass('expended');
+
+    var contentHeight = this.$element.height();
+    this.$element
+        .trigger('beforeHide')
+        .height(contentHeight)
+        .removeClass('v6-collapse')
+        .addClass('collapsing')
+        .trigger('beginHide');
+
+    var transitionDuration = util.getTransitionDurationFromElement(this.$element.get(0));
+
+    this.$element
+        .one('transitionend', function () {
+            that.isTransitioning = false;
+            $(this)
+                .removeClass('show collapsing')
+                .addClass('v6-collapse')
+                .trigger('hidden');
+        })
+        .transitionEndEmulator(transitionDuration)
+        .height('');
+};
+
+Collapse.prototype.toggle = function () {
+    if (this.$element.hasClass('show')) {
+        this.hide();
+    } else {
+        this.show();
+    }
+};
+
+// 插件
+$.fn.v6collapse = function (method) {
+    return this.each(function () {
+        var $this = $(this);
+        var instance = $this.data('vui.collapse');
+
+        if (!instance) $this.data('vui.collapse', (instance = new Collapse(this)));
+        if (typeof method === 'string') instance[method]();
+    });
+};
+
+// 生成实例
+$(document).on('click.vui.collapse', '[data-toggle="v6-collapse"]', function (e) {
+    e.preventDefault();
+    var $this = $(this);
+    var targetSelector = $this.attr('data-target') || $this.attr('href');
+    var $target = targetSelector ? $(targetSelector) : $this.closest('.v6-collapse-container').children('.v6-collapse');
+
+    $target.v6collapse('toggle');
+
+    if ($target.hasClass('show')) return;
+
+    var $closeSiblings = $this.closest('.v6-collapse-container[data-hide-siblings]');
+
+    if ($closeSiblings.length > 0) {
+        $closeSiblings
+            .siblings('.v6-collapse-container')
+            .children('.v6-collapse.show')
+            .v6collapse('hide');
+    }
+});
+
+/***/ }),
+
+/***/ "./base/ui/js/select.js":
+/*!******************************!*\
+  !*** ./base/ui/js/select.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+!function ($) {
+    var Select = function (element, options) {
+        this.$element = $(element);
+        this.options = options;
+        this._init();
+    };
+
+    Select.prototype._init = function () {
+        var that = this;
+        var listItemsStr = '';
+        var selectedText = this.$element.find('option:checked').html();
+
+        this.$element.find('option').each(function (index) {
+            var $option = $(this);
+            var text = $option.html();
+            var selected = $option.is(":checked");
+            var classValue = $.trim((selected ? 'selected ' : '') + ($option.attr('class') || ''));
+            var attrClass = classValue ? 'class="' + classValue + '"' : '';
+            var attrs = '';
+
+            $.each(this.attributes, function () {
+                if(this.name === 'class' || this.name === 'data-index') return true;
+                attrs += (this.name + '="' + this.value + '"');
+            });
+
+            attrs = $.trim(attrClass + ' ' + attrs);
+
+            listItemsStr += '<li ' + attrs + ' data-index="' + index + '">' + text + '</li>';
+        });
+
+        this.$element
+            .append('<div class="v6-select-trigger"><span>' + selectedText + '</span></div>')
+            .append('<ul class="v6-select-option-list">' + listItemsStr + '</ul>');
+
+        this.$element.on('click', '.v6-select-trigger', function () {
+            that.toggle();
+        });
+
+        this.$element.on('click', '.v6-select-option-list > li', function () {
+            that.choice(this);
+        });
+
+        $(document).on('click', function (e) {
+            var $target = $(e.target);
+
+            if ($target.closest('.v6-select').get(0) !== that.$element.get(0)) that.close();
+        });
+    };
+
+    Select.prototype.open = function () {
+        this.$element.addClass('open');
+    };
+
+    Select.prototype.close = function () {
+        this.$element.removeClass('hover open');
+    };
+
+    Select.prototype.toggle = function (state) {
+        this.$element.toggleClass('open', state);
+    };
+
+    Select.prototype.choice = function (option) {
+        var $option = $(option);
+        var selectedIndex = $option.attr('data-index');
+        var $select = this.$element.find('select');
+        var $triggerInner = this.$element.find('.v6-select-trigger span');
+
+        this.close();
+
+        if ($option.hasClass('selected')) return;
+
+        $option.addClass('selected').siblings().removeClass('selected');
+        $select.children().get(selectedIndex).selected = true;
+        $triggerInner.text($select.children(':checked').html());
+        $select.trigger('change');
+    };
+
+    var plugin = function (method, options) {
+        return this.each(function () {
+            var $this = $(this);
+            var instance = $this.data('vui.select');
+
+            if (!instance) $this.data('vui.select', instance = new Select(this));
+
+            if (typeof method === 'string') instance[method](options);
+        });
+    };
+
+    $.fn.v6select = plugin;
+    $.fn.v6select.Constructor = Select;
+
+    $(document)
+        .on('mouseenter.vui.select', '.v6-select', function () {
+            $(this).addClass('hover');
+        })
+        .on('mouseleave.vui.select', '.v6-select', function () {
+            $(this).removeClass('hover');
+        });
+
+    $(document).on('mouseenter.vui.select', '.v6-select', function () {
+        var $this = $(this);
+        var instance = $this.data('vui.select');
+
+        if (instance) return;
+
+        $this.data('vui.select', plugin.call($this));
+    });
+
+    $('.v6-select').each(function(){
+        var $this=$(this);
+        var initialValue=$this.find('select option:eq(0)').text();
+        $this.append('<div class="v6-select-trigger"><span>'+initialValue+'</span></div>');
+    });
+
+    $.fn.v6selectReader = function(selectItem, optionIndex){
+        return this.each(function () {
+            var $this = $(this);
+            var selectOptionsHtml='';
+            var viewOptionsHtml='';
+            var $thisSelect=$this.find('select');
+            var $thisView=$this.find('ul.v6-select-option-list');
+            var viewValueDom=$this.find(".v6-select-trigger span");
+            for(var i = 0; i < selectItem.length; i++){
+                selectOptionsHtml+='<option value="'+selectItem[i]+'">'+selectItem[i]+'</option>';
+                viewOptionsHtml  +=(i===optionIndex)?'<li class="selected" data-index="'+i+'">'+selectItem[i]+'</li>':'<li data-index="'+i+'">'+selectItem[i]+'</li>';
+            }
+            $thisSelect.html(selectOptionsHtml);
+            $thisView.html(viewOptionsHtml);
+            $thisSelect.val(selectItem[optionIndex]);
+            viewValueDom.html(selectItem[optionIndex]);
+        });
+    };
+}(jQuery);
+
+/***/ }),
+
+/***/ "./base/ui/js/tab.js":
+/*!***************************!*\
+  !*** ./base/ui/js/tab.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Tab = function (element, options) {
+    this.$element = $(element);
+    this.options = options;
+    this.$container = this.$element.closest('.v6-tab-container');
+    this.$wrapper = this.$container.find('> .v6-tab-wrapper');
+};
+
+Tab.prototype.show = function (index) {
+    var $tabItems = this.$element.find('> ul > li');
+    var $currentActive = $tabItems.filter('.active');
+    var $active = $tabItems.eq(index);
+
+    if ($active.hasClass('active')) return;
+
+    $currentActive
+        .trigger('beforeInactivate')
+        .removeClass('active')
+        .trigger('afterInactivate');
+
+    $active
+        .trigger('beforeActivate')
+        .addClass('active')
+        .trigger('beforeActivate');
+
+    var $contents = this.$wrapper.find('> .v6-tab-content');
+    var $currentShow = $contents.filter('.active');
+    var $show = $contents.eq(index);
+
+    $currentShow
+        .trigger('beforeHide')
+        .removeClass('active')
+        .trigger('afterHide');
+
+    $show
+        .trigger('beforeShow')
+        .addClass('active')
+        .trigger('afterShow');
+};
+
+$.fn.v6tab = function (index) {
+    return this.each(function () {
+        var $this = $(this);
+        var instance = $this.data('vui.tab');
+
+        if (!instance) $this.data('vui.tab', (instance = new Tab(this)));
+
+        if (typeof index === 'number') instance['show'](index);
+    });
+};
+
+$.fn.v6tab.Constructor = Tab;
+
+var clickHandler = function () {
+    var $this = $(this);
+    var index = $this.parent().index();
+    var $tab = $this.closest('.v6-tab');
+
+    $tab.v6tab(index);
+};
+
+$(document).on('click.vui.tab', '.v6-tab a', clickHandler);
+
+/***/ }),
+
+/***/ "./base/ui/js/util.js":
+/*!****************************!*\
+  !*** ./base/ui/js/util.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var util = {
+    getTransitionDurationFromElement: function (element) {
+        if (!element) {
+            return 0;
+        }
+
+        // Get transition-duration of the element
+        var transitionDuration = $(element).css('transition-duration');
+        var transitionDelay = $(element).css('transition-delay');
+
+        var floatTransitionDuration = parseFloat(transitionDuration);
+        var floatTransitionDelay = parseFloat(transitionDelay);
+
+        // Return 0 if element or transition duration is not found
+        if (!floatTransitionDuration && !floatTransitionDelay) {
+            return 0;
+        }
+
+        // If multiple durations are defined, take the first
+        transitionDuration = transitionDuration.split(',')[0];
+        transitionDelay = transitionDelay.split(',')[0];
+
+        return (parseFloat(transitionDuration) + parseFloat(transitionDelay)) * 1000;
+    },
+};
+
+$.fn.transitionEndEmulator = function (duration) {
+    var that = this;
+    var called = false;
+
+    this.one('transitionend', function () {
+        called = true;
+    });
+
+    setTimeout(function() {
+        if (!called) {
+            that.trigger('transitionend');
+        }
+    }, duration);
+
+    return this;
+};
+
+module.exports = util;
+
+/***/ }),
+
+/***/ "./components/service/components/common/common.less":
+/*!**********************************************************!*\
+  !*** ./components/service/components/common/common.less ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./components/service/components/service-banner/service-banner.js":
+/*!************************************************************************!*\
+  !*** ./components/service/components/service-banner/service-banner.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var mediaQuery = __webpack_require__(/*! ./../../../../util/mediaQuery */ "./util/mediaQuery.js");  //获取屏幕宽度的方法
+
+//var slideNums = $(".service-swiper-container .swiper-slide").length;
+//var autoplay = (slideNums > 1) ? 6000 : false;
+//var autoplay = false;
+var isSwiper = $(".large-h-banner .service-swiper-container .swiper-wrapper").attr("data-swiper");
+if(isSwiper == "true"){
+    //autoplay = 6000;
+    new Swiper('.service-swiper-container', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        paginationClickable: true,
+        centeredSlides: true,
+        autoplay: 6000,
+        autoplayDisableOnInteraction: false,
+        //effect: "fade",
+        simulateTouch: false,
+        loop : true,
+    });
+}
+
+$(".swiper-slide .swiper-pagination-bullet").click(function(event){
+    event.stopPropagation();
+    event.preventDefault();
+    return false;
+});
+
+$('.service-swiper-container .swiper-slide').each(function(){
+    var $img = $(this);
+    var src_mb = $img.attr('src-mb');
+    var src_pc = $img.attr('src-pc');
+    var src_bg = (mediaQuery(1024)) ? src_pc : src_mb;
+    $(this).css('background-image', 'url(' + src_bg +')');
+});
+
+$(".service-banner .swiper-slide").on("click", ".product-play-btn", function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+});
+
+$('[video-url]').click(function() {
+    $('.video-div').fadeIn();
+    var videoUrl=$(this).attr('video-url');
+    if($('.video-modal-wrapper video').length==0){
+        var videoDom='<video src="'+videoUrl+'" autoplay="autoplay" controls="controls"></video>';
+        $('.video-modal-wrapper').append(videoDom);
+    }
+    else {
+        $('.video-modal-wrapper video').attr('src',videoUrl);
+    }
+});
+
+$('.video-close-btn').click(function() {
+    $('.video-div').fadeOut();
+    $(this).next('video')[0].pause();
+});
+
+var itemsWidth = setWidth($(".breadcrumb > li:not(:last)"));
+function setWidth(item){
+    var itemsWidth = 0;
+    item.each(function(){
+        itemsWidth += $(this).innerWidth() + 6;
+    });
+    return itemsWidth;
+}
+$(".breadcrumb > li:last-child").css("max-width","calc(100% - " + itemsWidth + "px)");
+
+
+var headerMethods = {};
+headerMethods.setTheme = function (strategy) {
+    var strategies = {
+        'transparent-light': function () {
+            $('#header').attr('data-theme', 'transparent-light');
+        },
+        'default': function () {
+            $('#header').attr('data-theme', '');
+        },
+        'auto': function () {
+            var set = function () {
+                $('#header').attr('data-theme', $(window).scrollTop() > 0 ? '' : 'transparent-light');
+            };
+
+            $(window).scroll(set);
+            set();
+        },
+    };
+
+    strategies[strategy]();
+};
+
+if (mediaQuery(1024) && $(".service-banner .product-banner-content").length) {
+    headerMethods.setTheme('auto');
+}
+
+// $(".breadcrumb-box .breadcrumb-text").each(function(){
+//     var $text = $(this);
+//     var containerLength = $text.width();
+//     var textLength = $text.get(0).scrollWidth;
+//     var text = $text.html();
+//     if (textLength > containerLength) {
+//         $text.attr( "title", text);
+//     } else {
+//         $text.removeAttr( "title");
+//     }
+// });
+
+
+
+/***/ }),
+
+/***/ "./components/service/components/service-banner/service-banner.less":
+/*!**************************************************************************!*\
+  !*** ./components/service/components/service-banner/service-banner.less ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./components/service/components/service-guide/service-guide.js":
+/*!**********************************************************************!*\
+  !*** ./components/service/components/service-guide/service-guide.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var mediaQuery = __webpack_require__(/*! ./../../../../util/mediaQuery */ "./util/mediaQuery.js");  //获取屏幕宽度的方法
+$(function(){
+    $('.service-v6-guide .service-guide-item img').each(function(){
+        var $img = $(this);
+        var src_mb = $img.attr('src-mb');
+        var src_pc = $img.attr('src-pc');
+    
+        $(this).attr('src', mediaQuery(1024) ? src_pc : src_mb);
+    });
+});
+
+
+
+
+
+/***/ }),
+
+/***/ "./components/service/components/service-guide/service-guide.less":
+/*!************************************************************************!*\
+  !*** ./components/service/components/service-guide/service-guide.less ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./components/service/components/service-icon-card/service-icon-card.js":
+/*!******************************************************************************!*\
+  !*** ./components/service/components/service-icon-card/service-icon-card.js ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var mediaQuery = __webpack_require__(/*! ./../../../../util/mediaQuery */ "./util/mediaQuery.js");  //获取屏幕宽度的方法
+$(function(){
+  
+
+    $.fn.equalHeight=function(el,rowNum){
+        $(this).each(function(){
+            var heightArr=[];
+            var itemNum=$(this).find(el).size();
+            for(var i=0; i< itemNum; i++){
+                var heightArrIndex1=parseInt(i/rowNum);
+                if(heightArr[heightArrIndex1]){
+                    if(heightArr[heightArrIndex1]<$(this).find(el).eq(i).outerHeight()){
+                        heightArr[heightArrIndex1]=$(this).find(el).eq(i).outerHeight();
+                    }
+                }
+                else{
+                    heightArr[heightArrIndex1]=$(this).find(el).eq(i).outerHeight();
+                }
+            }
+            for(var j=0; j< itemNum; j++){
+                var heightArrIndex2=parseInt(j/rowNum);
+                $(this).find(el).eq(j).outerHeight(heightArr[heightArrIndex2]);
+            }
+        });
+    };
+    
+    if(mediaQuery(768)){
+        $('.service-icon-card .service-icon-card-list').each(function(){
+            var $dataCols=$(this).attr("data-cols");
+            $(this).equalHeight('.tit',$dataCols);
+            $(this).equalHeight('.desc1',$dataCols);
+            $(this).equalHeight('.service-icon-card2-desc',$dataCols);
+        });
+    }else{
+        $(".service-icon-card2 .service-icon-card-item").each(function(){
+            var btnNums = $(this).find(".v6-btn").length;
+            if(btnNums < 2){
+                $(this).find(".v6-btn").css("display", "none");
+            }
+        });
+    }
+});
+
+/***/ }),
+
+/***/ "./components/service/components/service-icon-card/service-icon-card.less":
+/*!********************************************************************************!*\
+  !*** ./components/service/components/service-icon-card/service-icon-card.less ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./components/service/components/service-icon-card2/service-icon-card2.less":
+/*!**********************************************************************************!*\
+  !*** ./components/service/components/service-icon-card2/service-icon-card2.less ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./components/service/components/service-news/service-news.js":
+/*!********************************************************************!*\
+  !*** ./components/service/components/service-news/service-news.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ "./components/service/components/service-news/service-news.less":
+/*!**********************************************************************!*\
+  !*** ./components/service/components/service-news/service-news.less ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./components/service/components/service-pagenav/service-pagenav.js":
+/*!**************************************************************************!*\
+  !*** ./components/service/components/service-pagenav/service-pagenav.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+!function ($) {
+    var mediaQuery = __webpack_require__(/*! ./../../../../util/mediaQuery */ "./util/mediaQuery.js");  //获取屏幕宽度的方法
+
+    var $header = $("#header");
+    var $pagenav =  $('.service-pagenav .pagenav-box');
+    var navShowScrollTop = (mediaQuery(1024)) ? 20 : 0;
+    var fixedNavTop = $("#header .header-top").height();
+    var lang = $("html").attr("lang");
+    var site = $("html").attr("site");
+    if(lang == "en-US" && site == "china"){
+        var headerH = $(".header-wrapper-bg").height();
+        $(".service-pagenav .pagenav-box").css("top", headerH + "px");
+        $(".service-pagenav .pagenav-box").css("z-index", "8");
+    }
+    $pagenav.css('top', fixedNavTop + 'px');
+
+    /* 导航显示与隐藏 */
+    /*if($(".service-pagenav").length){
+        $(window).scroll(function(){
+            var scrollTop = $(this).scrollTop();
+            
+            if(scrollTop > navShowScrollTop) {
+                if(mediaQuery(769)){                  
+                    $("#header").height(88);
+                    $("#header .header-bottom").height(48);              
+                    $("#header .header-dropdown").css("top", "88px");
+                    $("#header .header-inner").height(88);
+                    $("#header .header-inner::before").height(88);
+                    $header.addClass("fade");
+                    $(".service-pagenav").removeClass("pagenave-position");
+                }
+                $pagenav.addClass("fixed");
+            } else {
+                if(mediaQuery(769)){
+                    $("#header").height(100);
+                    $("#header .header-bottom").height(60);
+                    $("#header .header-dropdown").css("top", "100px");
+                    $("#header .header-inner").height(100);
+                    $("#header .header-inner::before").height(100);
+                    $header.removeClass("fade");
+                    $(".service-pagenav").addClass("pagenave-position");
+                }
+                $pagenav.removeClass("fixed");
+                    
+            }
+        });
+    }*/
+    
+
+    // if(!mediaQuery(1024)) {
+
+    //     var itemsWidth = setWidth($(".service-pagenav .pagenav-menu .item"));
+
+    //     $(".service-pagenav .pagenav-menu").innerWidth(itemsWidth);
+        
+    // }
+
+    // function setWidth(item){
+    //     var itemsWidth = 0;
+    //     item.each(function(){
+    //         itemsWidth += $(this).innerWidth();
+    //     });
+    //     return itemsWidth;
+    // }
+}(jQuery);
+
+
+
+
+
+/***/ }),
+
+/***/ "./components/service/components/service-pagenav/service-pagenav.less":
+/*!****************************************************************************!*\
+  !*** ./components/service/components/service-pagenav/service-pagenav.less ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./components/service/components/service-recom-card/service-recom-card.js":
+/*!********************************************************************************!*\
+  !*** ./components/service/components/service-recom-card/service-recom-card.js ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var mediaQuery = __webpack_require__(/*! ./../../../../util/mediaQuery */ "./util/mediaQuery.js");  //获取屏幕宽度的方法
+$(function(){
+    // $(".service-recom-card-item .v6-btn").click(function(){
+    //     var btnHref = $(this).attr("data-href");
+    //     if(btnHref){
+    //         window.open(btnHref);
+    //     }
+    // });
+
+    $.fn.equalHeight=function(el,rowNum){
+        $(this).each(function(){
+            var heightArr=[];
+            var itemNum=$(this).find(el).size();
+            for(var i=0; i< itemNum; i++){
+                var heightArrIndex1=parseInt(i/rowNum);
+                if(heightArr[heightArrIndex1]){
+                    if(heightArr[heightArrIndex1]<$(this).find(el).eq(i).outerHeight()){
+                        heightArr[heightArrIndex1]=$(this).find(el).eq(i).outerHeight();
+                    }
+                }
+                else{
+                    heightArr[heightArrIndex1]=$(this).find(el).eq(i).outerHeight();
+                }
+            }
+            for(var j=0; j< itemNum; j++){
+                var heightArrIndex2=parseInt(j/rowNum);
+                $(this).find(el).eq(j).outerHeight(heightArr[heightArrIndex2]);
+            }
+        });
+    };
+    
+    if((mediaQuery(1024))){
+        $('.service-recom-card .service-recom-card-list').each(function(){
+            $(this).equalHeight('.service-recom-card-item[data-cols="2"] .tit',2);
+            $(this).equalHeight('.service-recom-card-item[data-cols="2"] .desc',2);
+        });
+    }
+
+});
+
+/***/ }),
+
+/***/ "./components/service/components/service-recom-card/service-recom-card.less":
+/*!**********************************************************************************!*\
+  !*** ./components/service/components/service-recom-card/service-recom-card.less ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./components/service/components/service-single-card/service-single-card.js":
+/*!**********************************************************************************!*\
+  !*** ./components/service/components/service-single-card/service-single-card.js ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/** write js code here */
+
+$('.v6-section.service-single-card').each(function(){
+    var $img = $(this);
+    var src_mb = $img.attr('src-mb');
+    var src_pc = $img.attr('src-pc');
+    if(src_pc){
+        $(this).css('background-image', 'url(' + src_pc +')');
+    }
+    if(src_mb && innerWidth < 1024){
+        $(this).css('background-image', 'url(' + src_mb +')'); 
+    }  
+});
+
+/***/ }),
+
+/***/ "./components/service/components/service-single-card/service-single-card.less":
+/*!************************************************************************************!*\
+  !*** ./components/service/components/service-single-card/service-single-card.less ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./components/service/components/service-table/service-table.js":
+/*!**********************************************************************!*\
+  !*** ./components/service/components/service-table/service-table.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var FlexHeight = __webpack_require__(/*! ./../../../../util/flexHeight */ "./util/flexHeight.js");
+var $table = $('.service-v6-table');
+
+// 按行排布的表格
+$table.each(function () {
+    var $thisTable = $(this);
+
+    $thisTable.on('mouseenter', '.service-v6-table-row .service-v6-table-cell', function () {
+        var $hoverCell = $(this);
+        var hoverIndex = $hoverCell.index();
+
+        if (hoverIndex === 0) return;
+
+        $thisTable
+            .find('.service-v6-table-cell')
+            .removeClass('active');
+
+        $thisTable.find('.service-v6-table-row').each(function () {
+            var $row = $(this);
+
+            $row
+                .find('.service-v6-table-cell')
+                .eq(hoverIndex)
+                .addClass('active');
+        });
+    });
+
+    if ($thisTable.hasClass('service-v6-table-fixed-head')) {
+        var $tableHead = $thisTable.find('.service-v6-table-head');
+        var $tableHeadRow = $tableHead.find('.service-v6-table-row');
+        var $tableLastRow = $thisTable.find('.service-v6-table-row').last();
+
+        $(window).scroll(function () {
+            var $pagenav = $('.pagenav-box');
+            var headerHeight = $('#header').outerHeight();
+            var tableTop = $thisTable.get(0).getBoundingClientRect().top;
+            var lastRowTop = $tableLastRow.get(0).getBoundingClientRect().top;
+            var fixedTop = $pagenav.length ? $pagenav.get(0).getBoundingClientRect().top + $pagenav.outerHeight() : 0;
+            var tableTop2Header = tableTop - fixedTop;
+            var lastRowTop2Header = lastRowTop - fixedTop;
+            var tableHeadHeight = $tableHead.outerHeight();
+            var lastRowTop2tableHeader = lastRowTop2Header - tableHeadHeight;
+
+            if (tableTop2Header < 0 && lastRowTop2Header > 0) {
+                if (lastRowTop2tableHeader < 0) {
+                    fixedTop = fixedTop + lastRowTop2tableHeader;
+                }
+
+                $tableHead.height($tableHeadRow.height());
+                $tableHeadRow
+                    .addClass('v6-container')
+                    .css({
+                        position: 'fixed',
+                        top: fixedTop,
+                        width: '100%',
+                    });
+            } else {
+                $tableHead.height('');
+                $tableHeadRow
+                    .removeClass('v6-container')
+                    .css({
+                        position: '',
+                        top: '',
+                        width: '',
+                    });
+            }
+        });
+    }
+});
+
+// 按列排布的表格
+$table.each(function () {
+    var $thisTable = $(this);
+
+    $thisTable
+        .find('.service-v6-table-column')
+        .eq(0)
+        .find('.service-v6-table-head-cell,.service-v6-table-cell')
+        .each(function (index) {
+            var $this = $(this);
+            var $thisCol = $this.closest('.service-v6-table-column');
+            var flexItems = $this;
+
+            $thisCol.siblings().each(function () {
+                flexItems = flexItems.add($(this).find('.service-v6-table-head-cell,.service-v6-table-cell').eq(index));
+            });
+
+            new FlexHeight(flexItems);
+        });
+
+    $thisTable.on('mouseenter', '.service-v6-table-column', function () {
+        var $hoverCol = $(this);
+        var hoverColIndex = $hoverCol.index();
+
+        if (hoverColIndex === 0) return;
+
+        $hoverCol
+            .addClass('active')
+            .siblings()
+            .removeClass('active');
+    });
+});
+
+/***/ }),
+
+/***/ "./components/service/components/service-table/service-table.less":
+/*!************************************************************************!*\
+  !*** ./components/service/components/service-table/service-table.less ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./components/service/components/service-tabnews/service-tabnews.js":
+/*!**************************************************************************!*\
+  !*** ./components/service/components/service-tabnews/service-tabnews.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+$('.service-v6-section-newstab [tab-title-list] li').click(function () {
+    var thisIndex=$(this).index();
+    $(this).addClass('active').siblings().removeClass('active');
+    var thisTabody=$(this).closest('.tabs-dark').next('.tabs-body');
+
+    thisTabody.find('.service-v6-newstab').eq(thisIndex).show().siblings().hide();
+});
+
+
+    $('.service-v6-section-newstab').each(function(){
+
+        var $swiperContainer=$(this).find(".scroll-list-wrapper.swiper-container"),
+            $uLeft=$(this).find(".u-icon-left"),
+            $uRight=$(this).find(".u-icon-right");
+            $uLeftMb=$(this).find(".u-icon-l"),
+            $uRightMb=$(this).find(".u-icon-r");
+           
+            new Swiper($swiperContainer,{
+                slidesPerView: 'auto',
+                prevButton: $uLeft,
+                nextButton: $uRight,
+                breakpoints:{
+                    767:{
+                        prevButton: $uLeftMb,
+                        nextButton: $uRightMb,
+                    }
+                }
+            });
+            
+        var $tabsBody = $(this).find(".tabs-body");
+        var $target = $tabsBody.attr('data-target');
+        $tabsBody.find(".service-v6-newstab-card").attr("target",$target);
+
+        var $liItems = $(this).find('.tab-title-list div');
+        new $.fn.flexHeight.Constructor($liItems);
+
+
+    });
+
+   
+
+
+/***/ }),
+
+/***/ "./components/service/components/service-tabnews/service-tabnews.less":
+/*!****************************************************************************!*\
+  !*** ./components/service/components/service-tabnews/service-tabnews.less ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./components/service/components/service-tabvideo/service-tabvideo.js":
+/*!****************************************************************************!*\
+  !*** ./components/service/components/service-tabvideo/service-tabvideo.js ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$.fn.equalHeight=function(el,rowNum){
+    $(this).each(function(){
+        var heightArr=[];
+        var itemNum=$(this).find(el).size();
+        for(var i=0; i< itemNum; i++){
+            var heightArrIndex1=parseInt(i/rowNum);
+            if(heightArr[heightArrIndex1]){
+                if(heightArr[heightArrIndex1]<$(this).find(el).eq(i).outerHeight()){
+                    heightArr[heightArrIndex1]=$(this).find(el).eq(i).outerHeight();
+                }
+            }
+            else{
+                heightArr[heightArrIndex1]=$(this).find(el).eq(i).outerHeight();
+            }
+        }
+        for(var j=0; j< itemNum; j++){
+            var heightArrIndex2=parseInt(j/rowNum);
+            $(this).find(el).eq(j).outerHeight(heightArr[heightArrIndex2]);
+        }
+    });
+};
+
+var winWidth =
+        window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth;
+var setflexHeight= function (){
+    if(winWidth > 1023){
+        $('.service-v6-tabvideo').each(function(){      
+            var thisCardlist=$(this).find('.cardlist:visible');  
+            var $dataCols=thisCardlist.find('.cardlist-num').attr("data-cols");
+            thisCardlist.equalHeight('.items-down-detail',$dataCols);
+            thisCardlist.equalHeight('.items-down',$dataCols);
+        });
+    }
+};
+window.onload = function(){
+    setflexHeight();
+};
+
+$('.service-v6-tabvideo [tab-title-list] li').click(function () {
+    var thisIndex=$(this).index();
+    $(this).addClass('active').siblings().removeClass('active');
+    var thisTabody=$(this).closest('.tabs-head').next('.tabs-body');
+
+    if(winWidth > 1023){
+        thisTabody.find('.cardlist').eq(thisIndex).show(1,function () {
+            setflexHeight();
+        }).siblings().hide();
+        /*thisTabody.find('.cardlist').eq(thisIndex).show().siblings().hide();
+
+        setTimeout(function(){
+            setflexHeight();
+        },100);*/
+      
+    }else{
+        thisTabody.find('.cardlist').eq(thisIndex).show().siblings().hide();
+    }
+});
+$('.service-v6-tabvideo .tabs-head-mb').click(function(){
+    $(this).toggleClass('active').next().slideToggle();
+});
+if(winWidth > 1023){
+    $('.service-v6-tabvideo').each(function(){
+        var $swiperContainer=$(this).find(".scroll-list-wrapper.swiper-container"),
+            $uLeft=$(this).find(".u-icon-left"),
+            $uRight=$(this).find(".u-icon-right");
+
+        new Swiper($swiperContainer,{
+            slidesPerView: 'auto',
+            prevButton: $uLeft,
+            nextButton: $uRight,
+        });
+    });
+}
+$(".service-v6-tabvideo .cardlist-items").on("click", ".items-up-v", function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+});
+$('.service-v6-tabvideo .cardlist-items').each(function(){
+    var href = $(this).attr('href');
+    if(href){
+        $(this).addClass("cards-link");
+    }
+});
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./components/service/components/service-tabvideo/service-tabvideo.less":
+/*!******************************************************************************!*\
+  !*** ./components/service/components/service-tabvideo/service-tabvideo.less ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./components/service/components/service-technology-card/service-technology-card.js":
+/*!******************************************************************************************!*\
+  !*** ./components/service/components/service-technology-card/service-technology-card.js ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var mediaQuery = __webpack_require__(/*! ./../../../../util/mediaQuery */ "./util/mediaQuery.js");
+
+$(function() {
+    var winWidth =
+        window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth;
+
+    $('.service-v6-section-technology-card').each(function(){
+
+        var $this = $(this);
+        $this.find('[tab-title-list] li').click(function () {
+
+			var oLi = this;
+            var thisIndex=$(this).index();
+            $(this).addClass('active').siblings().removeClass('active');
+            var thisTabody=$(this).closest('.tabs-head').next('.tabs-body');
+
+            if(winWidth > 767){
+                thisTabody.find('.cardlist').eq(thisIndex).show(1,function () { }).siblings().hide();
+            }else{
+                thisTabody.find('.cardlist').eq(thisIndex).show().siblings().hide();
+            }
+
+            oLi.timer = setInterval(function() {
+                if(oLi.className.indexOf('active') !=-1) {
+                    oLi.timer = null;
+                    textOverflow($this.find('.tab-title-list'));
+                }
+            }, 1);
+        });
+
+        $this.find('.cardlist').each(function() {
+            var $this = $(this);
+            var $cards = $this.find('.service-v6-technology-card');
+            var $more = $this.find('.service-v6-technology-more');
+            var cardLength = $cards.length;
+            var isMb = !mediaQuery(767);
+
+            if ((isMb && cardLength > 3) || (!isMb && cardLength > 9)) {
+                $more.addClass('show');
+            }
+
+            $this.find('.service-v6-technology-more a').on('click', function () {
+                var $a = $(this);
+                var $wrapper = $this.find('.service-v6-row');
+                var willExpend = !$a.hasClass('expended');
+
+                $a.toggleClass('expended', willExpend);
+                $wrapper.toggleClass('expended', willExpend);
+            });
+
+        });
+
+        var $swiperContainer=$(this).find(".scroll-list-wrapper.swiper-container"),
+            $uLeft=$(this).find(".u-icon-left"),
+            $uRight=$(this).find(".u-icon-right"),
+            $uMbLeft = $(this).find(".u-icon-l"),
+            $uMbRight=$(this).find(".u-icon-r");
+
+        new Swiper($swiperContainer,{
+            slidesPerView: 'auto',
+            prevButton: $uLeft,
+            nextButton: $uRight,
+            breakpoints: {
+                //当宽度小于等于768
+                768: {
+                    // slidesOffsetBefore : 8,
+                    // slidesOffsetAfter : 8,
+                    onInit: function(swiper) {
+                        if(swiper.slides.length > 4) {
+                            $uMbRight.fadeIn();
+                        }
+                    },
+                    onTransitionStart: function(swiper) {
+                        if(swiper.slides.length > 4) {
+                            $uMbLeft.fadeIn();
+                            $uMbRight.fadeIn();
+                            if(swiper.isEnd) {
+                                $uMbRight.fadeOut();
+                            }
+                            if(swiper.isBeginning) {
+                                $uMbLeft.fadeOut();
+                            }
+                        }
+                    },
+                },
+            },
+            onInit: function(swiper) {
+                if((swiper.slides.length == 7 || swiper.slides.length == 6) && winWidth > 1439) {
+                    swiper.prevButton.css('display','none');
+                    swiper.nextButton.css('display','none');
+                }
+            },
+
+        });
+
+        textOverflow($this.find('.tab-title-list'));
+    });
+
+    function textOverflow($el) {
+
+        if(winWidth > 767){
+            var initSize = 18;
+
+            $('li', $el).each(function(_index, ele) {
+                if($(ele).outerHeight() < 64) {
+                    $(ele).find('span').css({
+                        'line-height': '48px',
+                    });
+                }
+            });
+
+            while ($el.outerHeight() > 64 && initSize > 14) {
+                initSize -= 2;
+                var tmpSize = initSize;
+                $('span', $el).each(function(_index, ele) {
+                    $(ele).css({
+                        'font-size': tmpSize,
+                    });
+                });
+            }
+
+			$('li', $el).each(function(_index, ele) {
+                if($(ele).outerHeight() < 64) {
+                    $(ele).find('span').css({
+                        'line-height': '48px',
+                    });
+                }
+            });
+
+        }else {
+            $('li', $el).each(function(_index, ele) {
+                if($(ele).outerHeight() < 44) {
+                    $(ele).find('span').css({
+                        'line-height': '40px',
+                    });
+                }
+            });
+        }
+
+        $el.find('li').each(function(_index, ele) {
+            var maxH = winWidth > 767 ? 64 : 44;
+            var diff = winWidth > 767 ? 48 : 40;
+            $(ele).data('myTitle', $(ele).text());
+            if($(ele).outerHeight() > maxH) {
+                $(ele).height(maxH);
+                $(ele).find('span').css({
+                    'height': diff,
+                    'display': '-webkit-box',
+                    '-webkit-box-orient': 'vertical',
+                    '-webkit-line-clamp': '2',
+                    'overflow': 'hidden',
+                });
+
+                $(ele)
+                    .mouseover(function(e) {
+                        var tooltip = "<div class='service-v6-technology-card-tab-tip'>" + $(ele).data('myTitle') + '</div>';
+                        $('body').append(tooltip);
+                        $('.service-v6-technology-card-tab-tip')
+                            .css({
+                                top: e.pageY + 20 + 'px',
+                                left: e.pageX + 10 + 'px',
+                            })
+                            .show('fast');
+                    })
+                    .mouseout(function() {
+                        $('.service-v6-technology-card-tab-tip').remove();
+                    })
+                    .mousemove(function(e) {
+                        $('.service-v6-technology-card-tab-tip').css({
+                            top: e.pageY + 20 + 'px',
+                            left: e.pageX + 10 + 'px',
+                        });
+                    });
+            }
+
+        });
+    }
+
+});
+
+
+
+/***/ }),
+
+/***/ "./components/service/components/service-technology-card/service-technology-card.less":
+/*!********************************************************************************************!*\
+  !*** ./components/service/components/service-technology-card/service-technology-card.less ***!
+  \********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./components/service/components/service-technology/service-technology.js":
+/*!********************************************************************************!*\
+  !*** ./components/service/components/service-technology/service-technology.js ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var mediaQuery = __webpack_require__(/*! ./../../../../util/mediaQuery */ "./util/mediaQuery.js");
+
+$('.service-v6-section-technology').each(function() {
+    var $this = $(this);
+    $this.find('.service-v6-technology-more a').on('click', function () {
+        var $a = $(this);
+        var $wrapper = $a.closest('.service-v6-technology').find('.service-v6-row');
+        var willExpend = !$a.hasClass('expended');
+
+        $a.toggleClass('expended', willExpend);
+        $wrapper.toggleClass('expended', willExpend);
+    });
+
+    var $cards = $this.find('.service-v6-technology-card');
+    var $more = $this.find('.service-v6-technology-more');
+    var cardLength = $cards.length;
+    var isMb = !mediaQuery(768);
+
+    if ((isMb && cardLength > 3) || (!isMb && cardLength > 9)) {
+        $more.addClass('show');
+    }
+});
+
+/***/ }),
+
+/***/ "./components/service/components/service-technology/service-technology.less":
+/*!**********************************************************************************!*\
+  !*** ./components/service/components/service-technology/service-technology.less ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./components/service/components/service-timeline/service-timeline.js":
+/*!****************************************************************************!*\
+  !*** ./components/service/components/service-timeline/service-timeline.js ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var mediaQuery = __webpack_require__(/*! ./../../../../util/mediaQuery */ "./util/mediaQuery.js");
+
+var initTimeline = function ($outer) {
+    var $swiper = $outer.find('.swiper-container');
+    if ($swiper.data('timeLine')) return;
+
+    var $cards = $swiper.find('.service-v6-timeline-card');
+    var el_prev = $outer.find('.service-v6-timeline-prev').get(0);
+    var el_next = $outer.find('.service-v6-timeline-next').get(0);
+    var maxQuantity = parseInt($swiper.attr('data-max-quantity') || 3);
+    var cardQuantity = $cards.length;
+
+    var slidesPerView = mediaQuery(979) ? (cardQuantity < maxQuantity ? cardQuantity : maxQuantity) : 1;
+
+    var swiper = new Swiper($swiper.get(0), {
+        slidesPerView: slidesPerView,
+        prevButton: el_prev,
+        nextButton: el_next,
+    });
+
+    $outer.data('timeLine', swiper);
+};
+
+$('.service-v6-timeline').each(function () {
+    var $this = $(this);
+    var $cards = $this.find('.service-v6-timeline-card');
+
+    $cards.each(function () {
+        var $this = $(this);
+        var $date = $this.find('.service-v6-timeline-date');
+        var datePastText = $.trim($date.attr('date-past')) || $.trim($date.text());
+        var datePastArr = datePastText.split('.').map(function (item) {
+            return parseInt(item);
+        });
+        // Date接受的月份为0-11对应1-12月
+        var date = (new Date(datePastArr[0], datePastArr[1] - 1, datePastArr[2])).getTime();
+        var today = date2ZeroTime(new Date);
+
+        if (date < today) {
+            $this.addClass('service-v6-timeline-card-past');
+        }
+    });
+
+    if ($this.is(':visible')) {
+        initTimeline($this);
+    } else {
+        var $tabContent = $this.closest('.v6-tab-content');
+        $tabContent.on('afterShow', function () {
+            initTimeline($this);
+        });
+    }
+});
+
+function date2ZeroTime(date) {
+    date.setHours(0);
+    date.setMinutes(0);
+    date.setSeconds(0);
+    date.setMilliseconds(0);
+
+    return date.getTime();
+}
+    
+
+/***/ }),
+
+/***/ "./components/service/components/service-timeline/service-timeline.less":
+/*!******************************************************************************!*\
+  !*** ./components/service/components/service-timeline/service-timeline.less ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./components/service/components/service-txt-card-type/service-txt-card-type.js":
+/*!**************************************************************************************!*\
+  !*** ./components/service/components/service-txt-card-type/service-txt-card-type.js ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+var winWidth =
+    window.innerWidth ||
+    document.documentElement.clientWidth ||
+    document.body.clientWidth;
+
+function setConveiToolHeight($el){
+    if(winWidth >= 768){
+        $el.each(function(){
+            if($(this).parents(".tab-content-list-item").length ==0 || $(this).parents(".tab-content-list-item").css("display") == "block") {
+                if($(this).is('.car_scene_5')) {
+                    return;
+                }else if($(this).is('.car_scene_4')){
+                    $(this).setCardHeight('li', 2);
+                }else {
+                    $(this).setCardHeight('li', 3);
+                }
+            }
+        });
+    }
+}
+setConveiToolHeight($(".v6-section.txt-card_1 .product-v6-tabs"));
+
+
+$(function(){
+    var winWidth =
+        window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth;
+
+    /*tab head start*/
+    function listScroll(){
+
+        $('.txt-card_1 .ui-tab-container .scroll-list').each(function(){
+            var _this=$(this);
+            if (winWidth <= 768) {
+                if(_this.parents(".tab-transverse-type")){return true;}
+            }
+            var _W=_this.closest('.scroll-list-wrapper').width();
+            var _w=-16;
+            _this.find('li').each(function(){
+                _w+=$(this).innerWidth()+16;
+            });
+            _this.width(_w);
+
+            if(_W<_w){
+                _this.closest('.scroll-list-wrapper').siblings('.u-icon-right').fadeIn();
+            }
+            else {
+                _this.closest('.scroll-list-wrapper').siblings('.u-icon').fadeOut();
+            }
+        });
+    }
+    /*tab head end*/
+
+    $(".txt-card_1 .ui-tab-container").each(function(){
+        var _this_tool = $(this);
+        _this_tool.find('.tab-title-list>li').click(function(){
+            var thisIndex=$(this).index();
+            $(this).addClass('active').siblings().removeClass('active');
+            _this_tool.find('.tab-content-list-item').eq(thisIndex).show().siblings().hide();
+            if(winWidth > 768) {
+                this.timer = setTimeout(function() {
+                    if(_this_tool.find('.tab-content-list-item').eq(thisIndex).css('display') == 'block') {
+                        this.timer = null;
+                        setConveiToolHeight(_this_tool.find('.tab-content-list-item').eq(thisIndex).find('.product-v6-tabs'));
+                    }
+                }, 100);
+            }
+            // var $dataCols=_this_tool.find('.tab-content-list-item').eq(thisIndex).find('.product-v6-tabs').attr("data-cols");
+            // console.log(_this_tool.parents().parents().parents(".support_tool_1").length);
+            // if(_this_tool.parents().parents().parents(".support_tool_1").length>0){
+            //     $(_this_tool.find('.tab-content-list-item').eq(thisIndex).find('.product-v6-tabs')).setCardHeight('.product-tab',$dataCols);
+            // }else{
+            //     $(_this_tool.find('.tab-content-list-item').eq(thisIndex).find('.product-v6-tabs')).setCardHeight('li',$dataCols);
+            // }
+        });
+
+        //左右滚动
+        $(this).find(".tab-title-list-head .u-icon").click(function(){
+            var _this=$(this);
+            var _thisBtn=_this.hasClass('u-icon-left')?'left':'right';
+            var listWrapperWidth=$(this).siblings('.scroll-list-wrapper').outerWidth();
+            var list=$(this).siblings('.scroll-list-wrapper').find('.scroll-list');
+            var left=list.position().left;
+            var right=listWrapperWidth-list.outerWidth()-left;
+
+            var _liW = list.find('li').length;
+            var thisIndex=list.find('li.active').index();
+
+            if(_thisBtn==='left'){
+                if(thisIndex==1){ _this.fadeOut();}
+                _this.siblings(".u-icon-right").fadeIn();
+
+                if(left<=0){
+                    if(left >= -16-list.find('li.active').outerWidth()){
+                        left -= left;
+                    } else {
+                        left += 16 + list.find('li.active').outerWidth();
+                    }
+                    list.animate({'left':left,});
+                }
+                if(list.find('li.active').index()!==0){
+                    list.find('li.active').removeClass('active').prev().addClass('active');
+                }
+            }
+            else {
+                if(_liW==(thisIndex+2)){_this.fadeOut();}
+                _this.siblings(".u-icon-left").fadeIn();
+
+                if(right<=0){
+                    if(right >= -16-list.find('li.active').outerWidth()){
+                        left += right;
+                    } else {
+                        left -= 16 + list.find('li.active').outerWidth();
+                    }
+                    list.animate({'left':left,});
+                }
+                if(list.find('li.active').index()+1!==list.find('li').size()){
+                    list.find('li.active').removeClass('active').next().addClass('active');
+                }
+            }
+        });
+
+    });
+
+    listScroll();
+    $(window).resize(listScroll);
+
+    $(".txt-card_1 .ui-tab-container").each(function(){
+        var _this_tool = $(this);
+        _this_tool.find('.tab-mb-type-title').click(function(){
+            $(this).toggleClass('active').next().slideToggle();
+        });
+
+        if(winWidth<768){
+            if($(this).parents(".v6-section-body").hasClass("tab-transverse-type")){
+                var _UWidth = -16;
+                $(this).find(".tab-title-list").children("li").each(function(){
+                    _UWidth = $(this).innerWidth()+16;
+                });
+
+                if(_UWidth<winWidth){
+                    $(this).find(".u-icon-right").fadeIn();
+                }
+
+                $(this).find(".tab-title-list").scroll(function(){
+                    var _UWidth = -16,_liWisth = 0;
+                    var _windWidth = $(this).width();
+
+                    $($(this).find("li")).each(function(){
+                        _liWisth = $(this).innerWidth()+16;
+                        _UWidth += _liWisth;
+                    });
+
+                    var left_offset = $(this).children(":first").offset().left;
+
+                    if(left_offset<0){
+                        $(this).parents(".scroll-list-wrapper").siblings(".u-icon-left").fadeIn();
+                    }
+                    var  _oc= parseInt((Math.abs(left_offset)))+parseInt(_windWidth);
+                    if(_oc<_UWidth){
+                        $(this).parents(".scroll-list-wrapper").siblings(".u-icon-right").fadeIn();
+                    }
+
+                    if(left_offset==0){
+                        $(this).parents(".scroll-list-wrapper").siblings(".u-icon-left").fadeOut();
+                    }
+
+                    if(_oc==_UWidth){
+                        $(this).parents(".scroll-list-wrapper").siblings(".u-icon-right").fadeOut();
+                    }
+                });
+
+            }else{
+                $(this).find(".tab-content-list-item").hide();
+            }
+        }
+
+
+    });
+
+
+});
+
+
+/***/ }),
+
+/***/ "./components/service/components/service-txt-card-type/service-txt-card-type.less":
+/*!****************************************************************************************!*\
+  !*** ./components/service/components/service-txt-card-type/service-txt-card-type.less ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./components/service/components/tab/tab.js":
+/*!**************************************************!*\
+  !*** ./components/service/components/tab/tab.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$.fn.setCardHeight=function(el,rowNum){
+    $(this).each(function(){
+        var heightArr=[];
+        var itemNum=$(this).find(el).size();
+        for(var i=0; i< itemNum; i++){
+            var heightArrIndex1=parseInt(i/rowNum);
+            if(heightArr[heightArrIndex1]){
+                if(heightArr[heightArrIndex1]<$(this).find(el).eq(i).outerHeight()){
+                    heightArr[heightArrIndex1]=$(this).find(el).eq(i).outerHeight();
+                }
+            }
+            else{
+                heightArr[heightArrIndex1]=$(this).find(el).eq(i).outerHeight();
+            }
+        }
+        for(var j=0; j< itemNum; j++){
+            var heightArrIndex2=parseInt(j/rowNum);
+            var maxHeight = heightArr[heightArrIndex2];
+            var baseBtn =$(this).find(el).eq(j).find(".case-btn");
+            if(baseBtn.length>0){
+                if(baseBtn.attr("data-click")!="true"){
+                    baseBtn.attr("data-click","true");
+                    
+                    if(baseBtn.parents(".case-btn-hide").length){
+                        maxHeight = heightArr[heightArrIndex2];                        
+                    }else{
+                         maxHeight = heightArr[heightArrIndex2]-60;                         
+                    }
+                }
+            }
+            $(this).find(el).eq(j).outerHeight(maxHeight);
+        }
+    });
+};
+
+
+/***/ }),
+
+/***/ "./components/service/components/tab/tab.less":
+/*!****************************************************!*\
+  !*** ./components/service/components/tab/tab.less ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./components/service/main.js":
+/*!************************************!*\
+  !*** ./components/service/main.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+__webpack_require__(/*! ./../../base/ui/index.less */ "./base/ui/index.less");
+__webpack_require__(/*! ./../../base/ui/index */ "./base/ui/index.js");
+__webpack_require__(/*! ./../../base/framework/framework.js */ "./base/framework/framework.js");
+__webpack_require__(/*! ./components/common/common.less */ "./components/service/components/common/common.less");
+__webpack_require__(/*! ./../../util/jquery.flexHeight.js */ "./util/jquery.flexHeight.js");
+
+__webpack_require__(/*! ./components/service-pagenav/service-pagenav.less */ "./components/service/components/service-pagenav/service-pagenav.less");
+__webpack_require__(/*! ./components/service-pagenav/service-pagenav.js */ "./components/service/components/service-pagenav/service-pagenav.js");
+__webpack_require__(/*! ./components/service-banner/service-banner.less */ "./components/service/components/service-banner/service-banner.less");
+__webpack_require__(/*! ./components/service-banner/service-banner.js */ "./components/service/components/service-banner/service-banner.js");
+__webpack_require__(/*! ./components/service-single-card/service-single-card.less */ "./components/service/components/service-single-card/service-single-card.less");
+__webpack_require__(/*! ./components/service-single-card/service-single-card.js */ "./components/service/components/service-single-card/service-single-card.js");
+__webpack_require__(/*! ./components/service-table/service-table.less */ "./components/service/components/service-table/service-table.less");
+__webpack_require__(/*! ./components/service-table/service-table.js */ "./components/service/components/service-table/service-table.js");
+__webpack_require__(/*! ./components/service-news/service-news.less */ "./components/service/components/service-news/service-news.less");
+__webpack_require__(/*! ./components/service-news/service-news.js */ "./components/service/components/service-news/service-news.js");
+__webpack_require__(/*! ./components/tab/tab.less */ "./components/service/components/tab/tab.less");
+__webpack_require__(/*! ./components/tab/tab.js */ "./components/service/components/tab/tab.js");
+__webpack_require__(/*! ./components/service-txt-card-type/service-txt-card-type.less */ "./components/service/components/service-txt-card-type/service-txt-card-type.less");
+__webpack_require__(/*! ./components/service-txt-card-type/service-txt-card-type.js */ "./components/service/components/service-txt-card-type/service-txt-card-type.js");
+__webpack_require__(/*! ./components/service-recom-card/service-recom-card.less */ "./components/service/components/service-recom-card/service-recom-card.less");
+__webpack_require__(/*! ./components/service-recom-card/service-recom-card.js */ "./components/service/components/service-recom-card/service-recom-card.js");
+__webpack_require__(/*! ./components/service-technology/service-technology.less */ "./components/service/components/service-technology/service-technology.less");
+__webpack_require__(/*! ./components/service-technology/service-technology.js */ "./components/service/components/service-technology/service-technology.js");
+__webpack_require__(/*! ./components/service-technology-card/service-technology-card.less */ "./components/service/components/service-technology-card/service-technology-card.less");
+__webpack_require__(/*! ./components/service-technology-card/service-technology-card.js */ "./components/service/components/service-technology-card/service-technology-card.js");
+__webpack_require__(/*! ./components/service-timeline/service-timeline.less */ "./components/service/components/service-timeline/service-timeline.less");
+__webpack_require__(/*! ./components/service-timeline/service-timeline.js */ "./components/service/components/service-timeline/service-timeline.js");
+__webpack_require__(/*! ./components/service-icon-card/service-icon-card.less */ "./components/service/components/service-icon-card/service-icon-card.less");
+__webpack_require__(/*! ./components/service-icon-card/service-icon-card.js */ "./components/service/components/service-icon-card/service-icon-card.js");
+__webpack_require__(/*! ./components/service-icon-card2/service-icon-card2.less */ "./components/service/components/service-icon-card2/service-icon-card2.less");
+__webpack_require__(/*! ./components/service-tabvideo/service-tabvideo.js */ "./components/service/components/service-tabvideo/service-tabvideo.js");
+__webpack_require__(/*! ./components/service-tabvideo/service-tabvideo.less */ "./components/service/components/service-tabvideo/service-tabvideo.less");
+__webpack_require__(/*! ./components/service-guide/service-guide.js */ "./components/service/components/service-guide/service-guide.js");
+__webpack_require__(/*! ./components/service-guide/service-guide.less */ "./components/service/components/service-guide/service-guide.less");
+__webpack_require__(/*! ./components/service-tabnews/service-tabnews.less */ "./components/service/components/service-tabnews/service-tabnews.less");
+__webpack_require__(/*! ./components/service-tabnews/service-tabnews.js */ "./components/service/components/service-tabnews/service-tabnews.js");
+
+/***/ }),
+
+/***/ "./util/flexHeight.js":
+/*!****************************!*\
+  !*** ./util/flexHeight.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function FlexHeight($items) {
+    var that = this;
+    this.autoEqual = true;
+    this.$items = $items;
+    this.equal();
+    if ($.throttle) {
+        $(window).resize($.throttle(function () {
+            that.equal();
+        }));
+    } else {
+        $(window).resize(function () {
+            if (!that.autoEqual) return;
+            that.equal();
+        });
+    }
+}
+
+FlexHeight.prototype.equal = function () {
+    var maxHeight = 0;
+    this.$items
+        .height('')
+        .each(function () {
+            var height = $(this).outerHeight();
+            if (maxHeight < height) {
+                maxHeight = height;
+            }
+        })
+        .outerHeight(maxHeight);
+};
+
+FlexHeight.prototype.auto = function (param) {
+    if (param === undefined || this.autoEqual === param) {
+        return;
+    }
+
+    this.autoEqual = !!param;
+
+    if (this.autoEqual) {
+        this.equal();
+    } else {
+        this.$items.height('');
+    }
+
+};
+
+module.exports = FlexHeight;
+
+/***/ }),
+
+/***/ "./util/jquery.flexHeight.js":
+/*!***********************************!*\
+  !*** ./util/jquery.flexHeight.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* 组件：弹性高度盒子
+ * 依赖：$.throttle
+ =================*/
+!function ($) {
+    'use strict';
+
+    // FLEX CLASS DEFINITION
+    // =====================
+
+    function FlexHeight($items) {
+        var that = this;
+        this.autoEqual = true;
+        this.$items = $items;
+        this.equal();
+        if($.throttle) {
+            $(window).resize($.throttle(function () {
+                that.equal();
+            }));
+        } else {
+            $(window).resize(function () {
+                that.equal();
+            });
+        }
+    }
+
+    FlexHeight.prototype.equal = function () {
+        if(!this.autoEqual) return;
+        var maxHeight = 0;
+        this.$items
+            .height('')
+            .each(function () {
+                var height = $(this).height();
+                if (maxHeight < height) {
+                    maxHeight = height;
+                }
+            })
+            .height(maxHeight);
+    };
+
+    FlexHeight.prototype.auto = function (param) {
+        if(param === undefined || this.autoEqual == param) {
+            return;
+        }
+
+        this.autoEqual = !!param;
+
+        if(this.autoEqual) {
+            this.equal();
+        } else {
+            this.$items.height('');
+        }
+
+    };
+
+    // FLEX_HEIGHT PLUGIN DEFINITION
+    // =============================
+
+    var old = $.fn.flexHeight;
+
+    $.fn.flexHeight = function (option,param) {
+        return this.each(function () {
+            var $this = $(this);
+            var $items;
+            var data = $this.data('hw.flexHeight');
+
+            if(!data) {
+                if(option && option.items) {
+                    $items = $this.find(option.items);
+                } else {
+                    $items = $this.children('.flex-item');
+                }
+                $this.data('hw.flexHeight', new FlexHeight($items));
+            }
+
+            if(typeof option == 'string') {
+                data[option](param);
+            }
+        });
+    };
+
+    $.fn.flexHeight.Constructor = FlexHeight;
+
+
+    // FLEX_HEIGHT NO CONFLICT
+    // =======================
+
+    $.fn.flexHeight.noConflict = function () {
+        $.fn.flexHeight = old;
+        return this;
+    };
+
+
+    // FLEX_HEIGHT AUTO INIT
+    // =====================
+
+    $(document).ready(function () {
+        $('[data-toggle="flexHeight"]').flexHeight();
+    });
+
+}(jQuery);
+
+/***/ }),
+
+/***/ "./util/mediaQuery.js":
+/*!****************************!*\
+  !*** ./util/mediaQuery.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function (width) {
+    var time = (new Date).getTime();
+    var name = 'mediaQuery' + time;
+    var htmlStr = '<span class="'+name+'"><style>.'+name+'{font-size: 0 !important;}@media(min-width: '+width+'px){.'+name+'{font-size: 20px !important;}}</style></span>';
+    var $query = $('body').append(htmlStr).find('.' + name);
+    var is_gtWidth = ($query.css('font-size') === '20px');
+
+    $query.remove();
+
+    return is_gtWidth;
+};
+
+/***/ })
+
+/******/ });
+//# sourceMappingURL=index.min.js.map

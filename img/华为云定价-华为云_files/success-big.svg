@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54 (76480) - https://sketchapp.com -->
+    <title>分组 5</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="NPS反馈提交" transform="translate(-1209.000000, -650.000000)">
+            <g id="编组-12" transform="translate(1086.000000, 590.000000)">
+                <g id="编组-3" transform="translate(76.000000, 60.000000)">
+                    <g id="编组" transform="translate(47.000000, 0.000000)">
+                        <g id="分组-5">
+                            <path d="M0,30 C0,46.5675 13.4325,60 30,60 C46.5705,60 60,46.5675 60,30 C60,13.431 46.5705,0 30,0 C13.4325,0 0,13.4295 0,30 Z" id="Path" fill="#CFFCEE"></path>
+                            <path d="M5,30 C5,43.80625 16.19375,55 30,55 C43.80875,55 55,43.80625 55,30 C55,16.1925 43.80875,5 30,5 C16.19375,5 5,16.19125 5,30 Z" id="Path" fill="#50D4AB"></path>
+                            <polygon id="Path" fill="#FFFFFF" points="27.3465 42.9568528 15.4651262 30 17.6510871 27.3070866 27.3465 35.186 43.2555 19.2785 45.7849004 21.4828672"></polygon>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
