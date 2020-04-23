@@ -204,7 +204,7 @@ height: 100%;
 .huaweiclound-bei{
     width: 100%;
     height: 530px;
-    background-image: url(../img/bejin1.jpg);
+    background-image: url(../img/beijin1.jpg);
 }
 .huaweiclound-bei-box{
     position: relative;
@@ -299,6 +299,7 @@ height: 100%;
     position: absolute;
     top: 48px;
     left: 142px;
+    /* box-shadow: ; */
 }
 
 
@@ -398,4 +399,412 @@ height: 100%;
     position: absolute;
     top: 48px;
     left: 142px;
+}
+
+
+
+
+.huaweiclound-xin {
+    width: 100%;
+    height: 210px;
+    margin-top: 35px;
+}
+
+.huaweiclound-xin h1 {
+    font-size: 16px;
+    line-height: 45px;
+    font-weight: normal;
+}
+.huaweiclound-xin ul {
+    width: 100%;
+    height: 100%;
+}
+.huaweiclound-xin .huaweiclound-xin-item {
+    float: left;
+    width: calc(100% / 8);
+    font-size: 16px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.huaweiclound-xin a {
+    font-size: 12px;
+}
+.huaweiclound-xin .i-1 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 63px;
+    left: 50px;
+    background-size: 35px;
+    background-position: 3px -34px;
+    background-image: url(../img/z1.png);
+}
+.huaweiclound-xin .i-2 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 63px;
+    left: 215px;
+    background-size: 35px;
+    background-position: 3px -34px;
+    background-image: url(../img/z2.png);
+}
+.huaweiclound-xin .i-3 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 63px;
+    left: 379px;
+    background-size: 35px;
+    background-position: 3px -34px;
+    background-image: url(../img/z3.png);
+}
+.huaweiclound-xin .i-4 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 63px;
+    left: 535px;
+    background-size: 35px;
+    background-position: 3px -34px;
+    background-image: url(../img/z4.png);
+}
+.huaweiclound-xin .i-5 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 63px;
+    left: 698px;
+    background-size: 35px;
+    background-position: 3px -34px;
+    background-image: url(../img/z5.png);
+}
+.huaweiclound-xin .i-6 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 63px;
+    left: 860px;
+    background-size: 35px;
+    background-position: 3px -34px;
+    background-image: url(../img/z6.png);
+}
+.huaweiclound-xin .i-7 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 63px;
+    left: 1019px;
+    background-size: 35px;
+    background-position: 3px -34px;
+    background-image: url(../img/z7.png);
+}
+.huaweiclound-xin .i-8 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 63px;
+    left: 1177px;
+    background-size: 35px;
+    background-position: 3px -34px;
+    background-image: url(../img/z8.png);
+}
+.huaweiclound-xin .i-9 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 120px;
+    left: 50px;
+    background-size: 35px;
+    background-position: 3px -34px;
+    background-image: url(../img/z9.png);
+}
+.huaweiclound-xin .jy {
+    margin-left: -18px;
+}
+.huaweiclound-xin .i-10 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 120px;
+    left: 215px;
+    background-size: 35px;
+    background-position: 3px -34px;
+    background-image: url(../img/z10.png);
+}
+.huaweiclound-xin .i-11 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 120px;
+    left: 379px;
+    background-size: 35px;
+    background-position: 3px -34px;
+    background-image: url(../img/z11.png);
+}
+.huaweiclound-xin .i-12 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 120px;
+    left: 535px;
+    background-size: 35px;
+    background-position: 3px -34px;
+    background-image: url(../img/z12.png);
+}
+.huaweiclound-xin .i-13 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 120px;
+    left: 698px;
+    background-size: 35px;
+    background-position: 3px -34px;
+    background-image: url(../img/z13.png);
+}
+.huaweiclound-xin .i-14 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 120px;
+    left: 860px;
+    background-size: 35px;
+    background-position: 3px -34px;
+    background-image: url(../img/z14.png);
+}
+.huaweiclound-xin .i-15 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 120px;
+    left: 1019px;
+    background-size: 35px;
+    background-position: 3px -34px;
+    background-image: url(../img/z15.png);
+}
+.huaweiclound-xin .i-16 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 120px;
+    left: 1177px;
+    background-size: 35px;
+    background-position: 3px -34px;
+    background-image: url(../img/z16.png);
+}
+.huaweiclound-re {
+    width: 100%;
+    height: 655px;
+}
+.huaweiclound-re-box {
+    width: 100%;
+    height: 100%;
+}
+.huaweiclound-re-box1 {
+    position: relative;
+    height: 100%;
+    background-image: url(../img/beijin3.jpg);
+}
+.huaweiclound-re-box2 {
+    width: 100%;
+}
+.huaweiclound-re-box2-title{
+    /* position: absolute; */
+    font-size: 26px;
+    padding-top: 70px;
+    color: #fff;
+}
+
+.huaweiclound-re-box3 {
+    width: 1280px;
+    height: 504px;
+}
+.huaweiclound-re-box3-left {
+    position: absolute;
+    top: 30px;
+    width: 253px;
+    height: 474px;
+}
+.huaweiclound-nav-menus{
+    margin-top: 20px;
+}
+.huaweiclound-nav-menus h5>a {
+    margin-top: 20px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: normal;
+}
+.huaweiclound-nav-menus ul>li{
+    color: #fff;
+    margin-top: 5px;
+}
+.huaweiclound-re-box3-right {
+    position: absolute;
+    top: 30px;
+    width: 1000px;
+    /* height: 474px; */
+    left: 253px;
+    
+}
+.huaweiclound-right-box {
+    width: 272px;
+    height: 155px;
+    /* background-color: red; */
+    background-color: #f5f5f6;
+    float: left;
+    border: 1px solid #595c66;
+}
+.huaweiclound-right-box h5 {
+    color: #333333;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+.huaweiclound-right-box p {
+    margin-left: 30px;
+    margin-top: 10px;
+}
+.huaweiclound-right-box .span1 {
+    position: absolute;
+    top: 120px;
+    margin-left: 30px;
+}
+.huaweiclound-right-box .span2 {
+    position: absolute;
+    top: 120px;
+    margin-left: 30px;
+}
+.huaweiclound-right-box .span3 {
+    position: absolute;
+    top: 437px;
+    margin-left: 30px;
+}
+.huaweiclound-right-box .span4 {
+    position: absolute;
+    top: 280px;
+    margin-left: 30px;
+}
+.huaweiclound-right-box .span5 {
+    position: absolute;
+    top: 280px;
+    margin-left: 30px;
+}
+.huaweiclound-right-box .span6 {
+    position: absolute;
+    top: 120px;
+    margin-left: 30px;
+}
+.huaweiclound-right-box .span7 {
+    position: absolute;
+    top: 437px;
+    margin-left: 30px;
+}
+.huaweiclound-right-box .span8 {
+    position: absolute;
+    top: 437px;
+    margin-left: 30px;
+}
+.huaweiclound-right-box .span9 {
+    position: absolute;
+    top: 280px;
+    margin-left: 30px;
+}
+.huaweiclound-solution {
+    width: 100%;
+    height: 520px;
+    position: relative;
+}
+.huaweiclound-solution-box {
+    width: 100%;
+    height: 100%; 
+    background-image: url(../img/beijin4.jpg);
+}
+.huaweiclound-olution {
+    width: 100%;
+    position: absolute;
+    height: 98px;
+    top: 40px;
+}
+.huaweiclound-olution-title {
+    position: absolute;
+    font-size: 26px;
+    /* line-height: 98px; */
+    font-weight: 300;
+}
+.huaweiclound-oluction-stack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.huaweiclound-oluction-stack h3 {
+    position: absolute;
+    font-size: 16px;
+    left: 310px;
+    font-weight: normal;
+    top: 6px;
+}
+.huaweiclound-oluction-stack p {
+    position: absolute;
+    font-size: 14px;
+    top: 40px;
+    left: 310px;
+}
+.huaweiclound-oluction-stack p>span {
+    display: none;
+}
+.huaweiclound-oluction-stack a {
+    position: absolute;
+    left: 310px;
+    top: 80px;
+    border: 1px solid #252b3a;
+    width: 96px;
+    height: 27px;
+    text-align: center;
+    line-height: 27px;
+}
+.huaweiclound-olution-bottom {
+    margin-top: 135px;
+}
+.huaweiclound-olution-bottom ul>li {
+    float: left;
+    width: calc((100% - 192px)/4);
+    text-align: center;
+    margin-right: 40px;
+    margin-top: 30px;
+}
+.huaweiclound-olution-bottom h3 {
+    font-size: 18px;
+    line-height: 22px;
+    color: #252b3a;
+    margin-bottom: 12px;
+    font-weight: normal;
+    margin-top: 10px;
+}
+.huaweiclound-olution-bottom .text {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.huaweiclound-olution-bottom p {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+
+
+.huaweiclound-bestCloud {
+    width: 100%;
+    height: 970px;
+    position: relative;
+}
+.huaweiclound-bestClound-box {
+    width: 100%;
+    position: absolute;
+    height: 40px;
+    /* background-color: red; */
+    top: 50px;
+    font-size: 32px;
+    font-weight: 300;
 }
