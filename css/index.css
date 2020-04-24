@@ -60,9 +60,9 @@ height: 100%;
     left: -44px;
 }
 
-.huaweiclound-nav-sou #clound input{
+.huaweiclound-nav-sou .active input{
     height: 32px;
-    width: 141px;
+    /* width: 141px; */
     padding-left: 15px;
     padding-right: 44px;
     border: none;
@@ -132,9 +132,11 @@ height: 100%;
     background-size: 100% 100%;
     transform: rotateX(0deg);
 }
-.chinese-t {
+.hread-chinese-t {
     background-color: #fff;
     display: none;
+    position: absolute;
+    top: 50px;
 }
 .heard {
     display: inline-block;
@@ -157,7 +159,6 @@ height: 100%;
     height: 185px;
     position: relative;
     left: -30px;
-    display: none;
 }
 .hread-ul li {
     margin-top: -10px;
@@ -277,6 +278,7 @@ height: 100%;
     width: 312px;
     height: 100px;
     background-color: #fff;
+    box-shadow: 0px 10px 13px 0px #ccc;
 }
 .box1 .f {
     position: absolute;
@@ -311,6 +313,7 @@ height: 100%;
     width: 312px;
     height: 100px;
     background-color: #fff;
+    box-shadow: 0px 10px 13px 0px #ccc;
 }
 .box2 .q {
     position: absolute;
@@ -344,6 +347,7 @@ height: 100%;
     left: 670px;
     height: 100px;
     background-color: #fff;
+    box-shadow: 0px 10px 13px 0px #ccc;
 }
 .box3 .h {
     position: absolute;
@@ -377,6 +381,7 @@ height: 100%;
     left: 1003px;
     height: 100px;
     background-color: #fff;
+    box-shadow: 0px 10px 13px 0px #ccc;
 }
 .box4 .m {
     position: absolute;
@@ -796,7 +801,7 @@ height: 100%;
 
 .huaweiclound-bestCloud {
     width: 100%;
-    height: 970px;
+    height: 760px;
     position: relative;
 }
 .huaweiclound-bestClound-box {
@@ -807,4 +812,533 @@ height: 100%;
     top: 50px;
     font-size: 32px;
     font-weight: 300;
+}
+.huaweiclound-bestClound-box-body {
+    width: 100%;
+    height: 738px;
+    /* background-color: red; */
+    position: relative;
+    top: 125px;
+}
+.huaweiclound-left {
+    width: 490px;
+    height: 100%;
+    position: relative;
+}
+.huaweiclound-left-top {
+    width: 460px;
+    height: 205px;
+    position: absolute;
+    background-color: #fff;
+    top: 35px;
+    left: -35px;
+    box-shadow: -5px 0px 35px #ccc;
+}
+.huaweiclound-left-top h1 {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    font-size: 18px;
+    font-weight: normal;
+}
+.huaweiclound-left-top p {
+    position: absolute;
+    top: 75px;
+    left: 20px;
+    font-size: 14px;
+}
+.huaweiclound-left-top .te {
+    width: 122px;
+    height: 32px;
+    border: 1px solid #333333;
+    position: absolute;
+    top: 130px;
+    left: 20px;
+    text-align: center;
+    line-height: 32px;
+}
+.huaweiclound-left-top .jin {
+    color: #5285db;
+    position: absolute;
+    top: 130px;
+    left: 170px;
+    line-height: 32px;
+}
+.huaweiclound-right {
+    position: absolute;
+    width: 746px;
+    height: 584px;
+    /* background-color: yellow; */
+    left: 488px;
+    top: 0px;
+}
+
+.huaweiclound-right ul {
+    width: 100%;
+    height: 100%;
+    background-color: #f5f5f5;
+    margin-left: 15px;
+}
+.huaweiclound-right ul>li {
+    width: 369px;
+    height: 191px;
+    float: left;
+    border: 2px solid #fff;
+}
+.huaweiclound-right h2 {
+    margin-top: 34px;
+    margin-left: 40px;
+    font-size: 16px;
+}
+.huaweiclound-right p {
+    margin-top: 20px;
+    margin-left: 40px;
+    font-size: 16px;
+}
+.huaweiclound-right .money1 {
+    position: absolute;
+    top: 148px;
+    margin-left: 40px;
+    font-size: 14px;
+    font-weight: 700;
+
+}
+.huaweiclound-right .money2 {
+    position: absolute;
+    top: 148px;
+    margin-left: 40px;
+    font-size: 14px;
+    font-weight: 700;
+}
+.huaweiclound-right .money3 {
+    position: absolute;
+    top: 340px;
+    margin-left: 40px;
+    font-size: 14px;
+    font-weight: 700;
+}
+.huaweiclound-right .money4 {
+    position: absolute;
+    top: 340px;
+    margin-left: 40px;
+    font-size: 14px;
+    font-weight: 700;
+}
+.huaweiclound-right .money5 {
+    position: absolute;
+    top: 530px;
+    margin-left: 40px;
+    font-size: 14px;
+    font-weight: 700;
+}
+.huaweiclound-right .money6 {
+    position: absolute;
+    top: 530px;
+    margin-left: 40px;
+    font-size: 14px;
+    font-weight: 700;
+}
+.huaweiclound-right .nian1 {
+    position: absolute;
+    top: 149px;
+    margin-left: 133px;
+    font-size: 14px;
+    text-decoration: line-through;
+}
+.huaweiclound-right .nian2 {
+    position: absolute;
+    top: 149px;
+    margin-left: 133px;
+    font-size: 14px;
+    text-decoration: line-through;
+}
+.huaweiclound-right .nian3 {
+    position: absolute;
+    top: 340px;
+    margin-left: 133px;
+    font-size: 14px;
+    text-decoration: line-through;
+}
+.huaweiclound-right .nian4 {
+    position: absolute;
+    top: 530px;
+    margin-left: 133px;
+    font-size: 14px;
+    text-decoration: line-through;
+}
+
+
+
+.huaweiclound-news {
+    width: 100%;
+    height: 730px;
+    position: relative;
+}
+.huaweiclound-news-box {
+    width: 100%;
+    position: absolute;
+    height: 40px;
+    /* background-color: red; */
+    top: 50px;
+    font-size: 32px;
+    font-weight: 300;
+}
+.huaweiclound-news-box-body {
+    width: 100%;
+    height: 444px;
+    /* background-color: red; */
+    position: relative;
+    top: 125px;
+}
+.huaweiclound-news-center {
+    width: 420px;
+    height: 444px;
+    background-color: red;
+}
+.huaweiclound-news-center-top {
+    position: absolute;
+    width: 420px;
+    height: 210px;
+    background-color: yellow;
+    left: 430px;
+}
+.huaweiclound-news-center-top img {
+    width: 100%;
+    height: 100%;
+}
+.huaweiclound-news-center-bottom {
+    position: absolute;
+    width: 420px;
+    height: 210px;
+    background-color: yellow;
+    left: 430px;
+    top: 233px;
+}
+.huaweiclound-news-center-bottom img {
+    width: 100%;
+    height: 100%;
+}
+.huaweiclound-news-left {
+    position: absolute;
+    width: 420px;
+    height: 444px;
+}
+.huaweiclound-news-left img {
+    width: 100%;
+    height: 100%;
+}
+.huaweiclound-news-right {
+    position: absolute;
+    width: 420px;
+    height: 444px;
+    background-color: red;
+    left: 860px;
+    top: 0px;
+}
+.huaweiclound-news-right a {
+    width: 352px;
+    height: 147px;
+}
+
+
+.huaweiclound-safe {
+    width: 100%;
+    height: 340px;
+    position: relative;
+}
+.huaweiclound-section-top {
+    width: 100%;
+    height: 88px;
+    /* background-color: red; */
+    border-bottom: 1px solid #dfe1e6;
+}
+.huaweiclound-section-top-left {
+    width: 256px;
+    height: 88px;
+    /* background-color: yellow; */
+    float: left;
+    font-size: 32px;
+    font-weight: 300;
+}
+.huaweiclound-section-top-right {
+    width: 1024px;
+    height: 88px;
+    /* background-color: blue; */
+    float: right;
+    justify-content: space-between;
+}
+.huaweiclound-section-item{
+    width: 256px;
+    height: 88px;
+    float: left;
+}
+.huaweiclound-section-item_text {
+    font-size: 42px;
+    /* line-height: 88px; */
+    text-align: center ;
+
+}
+.huaweiclound-section-item_title {
+    text-align: center;
+    margin-top: 18px;
+}
+.huaweiclound-section-bottom {
+    width: 100%;
+    height: 157px;
+}
+.section-logo {
+    padding: 100px 0;
+    width: 147px;
+    float: left;
+    margin-left: 66px;
+}
+
+.section-logo-image {
+    width: 86px;
+    height: 86px;   
+}
+.section-logo-text {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #252b3a;
+    height: 22px;
+    line-height: 22px;
+}
+
+
+
+
+
+.huaweiclound-global {
+    width: 100%;
+    height: 500px;
+}
+.huaweiclound-global-site {
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/d.jpg);
+}
+.huaweiclound-global-top {
+    position: absolute;
+    width: 100%;
+    height: 75px;
+    top: 80px;
+}
+.huaweiclound-global-top-left {
+    color: #fff;
+    font-size: 30px;
+    float: left;
+    width: 225px;
+    height: 75px;
+}
+.huaweiclound-global-top-right {
+    color: #fff;
+    width: 435px;
+    font-size: 16px;
+    height: 75px;
+    position: absolute;
+    left: 300px;
+}
+
+.huaweiclound-global-bottom {
+    width: 545px;
+    position: absolute;
+    height: 255px;
+    top: 220px;
+    /* background-color: red; */
+
+}
+.tab-line {
+    color: #fff;
+    font-size: 20px;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+}
+.tab-content {
+    width: 545px;
+    /* height: 100%; */
+    /* background-color: red; */
+    border-top: 1px solid #ccc;
+}
+.tab-seletor {
+    color: #fff;
+}
+
+/* .tab-section-show {
+    display: none;
+} */
+.region-item {
+    float: left;
+    margin-left: 10px;
+    color: #fff;
+    width: 99px;
+    height: 100px;
+}
+.region-item_title {
+    font-size: 14px;
+    margin-top: 30px;
+}
+.region-item_az {
+    margin-top: 12px;
+}
+.tab-section-two{
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    display: none;
+}
+.tab-seletor-active {
+    margin-left: 40px;
+    color: #fff;
+}
+.huaweiclound-free {
+    position: relative;
+    width: 100%;
+    height: 150px;
+}
+.huaweiclound-free img {
+    width: 100%;
+    height: 100%;
+}
+.huaweiclound-free-register {
+    position: absolute;
+    width: 560px;
+    height: 45px;
+    left: 565px;
+    top: 52px;
+    line-height: 45px;
+    text-align: center;
+}
+.huaweiclound-free-register h4 {
+    color: #fff;
+    font-size: 32px;
+}
+.huaweiclound-free-register a {
+    float: right;
+    position: absolute;
+    top: 0px;
+    left: 750px;
+    font-size: 14px;
+    color: #fff;
+    width: 120px;
+    height: 44px;
+    border: 1px solid #333;
+    text-align: center;
+    background-color: #c7000b;
+}
+
+.huaweiclound-footer {
+    width: 100%;
+    height: 101px;
+    background-color: #f3f3f3;
+}
+.huaweiclound-footer-wrapper {
+    width: 100%;
+    height: 100%;
+}
+.huaweiclound-footer-wrapper ul {
+    overflow: hidden;
+    border-bottom: 1px solid #e2e2e2;
+}
+.huaweiclound-footer-wrapper li {
+    float: left;
+    width: 20%;
+}
+.huaweiclound-footer-wrapper li>a {
+    display: block;
+    position: relative;
+    height: 72px;
+    padding-left: 55px;
+    padding-top: 28px;
+}
+.huaweiclound-footer-wrapper a>i {
+    position: absolute;
+    left: 0;
+    top: 50px;
+    width: 40px;
+    height: 40px;
+    margin-top: -20px;
+    background-size: 100% 100%;
+
+}
+.footer-support {
+    background-image: url(../img/support.svg);
+}
+.footer-unsub {
+    background-image: url(../img/unsub.svg);
+}
+.footer-record {
+    background-image: url(../img/record.svg);
+}
+.footer-feedback {
+    background-image: url(../img/feedback.svg);
+}
+.footer-vip {
+    background-image: url(../img/vip.svg);
+}
+.huaweiclound-footer-wrapper a>h2 {
+    margin-bottom: 5px;
+    font-size: 18px;
+    line-height: 22px;
+    color: #252b3a;
+}
+.huaweiclound-footer-wrapper a>p {
+    font-size: 14px;
+    line-height: 18px;
+    color: #666a75;
+}
+
+.huaweiclound-final {
+    width: 100%;
+    height: 394px;
+    background-color: #f3f3f3;
+}
+.huaweiclound-final-left {
+    width: 242px;
+    height: 253px;
+    padding-top: 52px;
+    padding-bottom: 42px;
+    border-bottom: 1px solid #e2e2e2;
+}
+.huaweiclound-final-left-box {
+    width: 142px;
+    height: 253px;
+}
+.huaweiclound-left-box-top {
+    width: 142px;
+    height: 81px;
+}
+.huaweiclound-left-box-top h2{
+    margin-bottom: 12px;
+    font-size: 14px;
+    line-height: 18px;
+    color: #252b3a;
+    font-weight: normal;
+}
+.huaweiclound-left-box-top p {
+    font-size: 20px;
+    line-height: 22px;
+    color: #252b3a;
+}
+.huaweiclound-left-box-top p+p {
+    margin-top: 7px;
+}
+.huaweiclound-left-box-top ul {
+    width: 142px;
+    height: 72px;
+
+}
+.huaweiclound-left-box-top ul>li {
+    font-size: 12px;
+    line-height: 24px;
+    margin-top: 5px;
+}
+
+
+
+
+.huaweiclound-left-box-top dl>dt {
+    margin-top: 40px;
+    font-size: 14px;
 }
