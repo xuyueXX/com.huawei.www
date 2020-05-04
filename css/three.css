@@ -202,3 +202,285 @@ height: 100%;
     position: relative;
 }
 
+.huaweiclound-bgI {
+    width: 100%;
+    height: 350px;
+    position: relative;
+}
+.huaweiclound-bgI img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.huaweiclound-bgI-top-banner-box {
+    width: 100%;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%,-50%);
+}
+.huaweiclound-bgI-banner-jieshao {
+    color: #ffffff;
+    width: 100%;
+    text-align: left;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.huaweiclound-bgI-top-title {
+    margin-bottom: 20px;
+    font-size: 40px;
+    color: #252b3a;
+    line-height: 50px;
+}
+.huaweiclound-bgI-top-jieshao {
+    width: 620px;
+    text-align: left;
+    font-size: 14px;
+    color: #575D6C;
+    line-height: 22px;
+}
+.huaweiclound-jihua {
+    width: 100%;
+    padding-bottom: 2.4%;
+    padding-top: 2.4%;
+}
+.huaweiclound-jihua h1 {
+    font-size: 24px;
+    color: #252B3A;
+    text-align: center;
+    line-height: 30px;
+}
+.huaweiclound-jihua-box {
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+.wotu-ict-listl {
+    position: relative;
+    display: inline-block;
+    width: 43%;
+    margin-right: 1%;
+    padding: 30px;
+    border: 1px solid #EBEBEB;
+    background: #fff;
+    margin-top: 30px;
+}
+.wotu-ict-listl img {
+    vertical-align: middle;
+}
+.wotu-ict-listr {
+    position: relative;
+    display: inline-block;
+    width: 43%;
+    margin-left: 1%;
+    padding: 30px;
+    border: 1px solid #EBEBEB;
+    background: #fff;
+    margin-top: 30px;
+}
+.wotu-ict-listr img {
+    vertical-align: middle;
+}
+.wotu-ict-listbox {
+    width: 60%;
+    height: 120px;
+    overflow: hidden;
+    margin: 0 5%;
+    text-align: left;
+    display: inline-block;
+    vertical-align: middle;
+}
+.wotu-ict-listbox p {
+    font-size: 18px;
+    margin: 0;
+    padding-bottom: 10px;
+    font-weight: 600;
+}
+.wotu-ict-listbox span {
+    font-size: 14px;
+    line-height: 22px;
+}
+.wotu-ict-listurl {
+    display: inline-block;
+    padding: 1% 2%;
+    font-size: 14px;
+    color: #df6565;
+    background: #fff;
+    border: 1px solid #df6565;
+    border-radius: 1px;
+    vertical-align: middle;
+}
+.huaweiclound-middle {
+    font-size: 0;
+    background-color: #f2f2f2;
+    padding-bottom: 2.4%;
+    padding-top: 2.4%;
+}
+.huaweiclound-middle-top h1 {
+    margin-bottom: 0;
+    font-size: 24px;
+    color: #252B3A;
+    text-align: center;
+    line-height: 30px;
+}
+.huaweiclound-middle-box {
+   font-size: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 0; 
+}
+.right1 {
+    width: 100%;
+    text-align: justify;
+    display: inline-block;
+    font-size: 16px;
+    vertical-align: middle;
+    line-height: 22px;
+}
+
+
+.huaweiclound-footer {
+    width: 100%;
+    height: 101px;
+    background-color: #f3f3f3;
+}
+.huaweiclound-footer-wrapper {
+    width: 100%;
+    height: 100%;
+}
+.huaweiclound-footer-wrapper ul {
+    overflow: hidden;
+    border-bottom: 1px solid #e2e2e2;
+}
+.huaweiclound-footer-wrapper li {
+    float: left;
+    width: 20%;
+}
+.huaweiclound-footer-wrapper li>a {
+    display: block;
+    position: relative;
+    height: 72px;
+    padding-left: 55px;
+    padding-top: 28px;
+}
+.huaweiclound-footer-wrapper a>i {
+    position: absolute;
+    left: 0;
+    top: 50px;
+    width: 40px;
+    height: 40px;
+    margin-top: -20px;
+    background-size: 100% 100%;
+
+}
+.footer-support {
+    background-image: url(../img/support.svg);
+}
+.footer-unsub {
+    background-image: url(../img/unsub.svg);
+}
+.footer-record {
+    background-image: url(../img/record.svg);
+}
+.footer-feedback {
+    background-image: url(../img/feedback.svg);
+}
+.footer-vip {
+    background-image: url(../img/vip.svg);
+}
+.huaweiclound-footer-wrapper a>h2 {
+    margin-bottom: 5px;
+    font-size: 18px;
+    line-height: 22px;
+    color: #252b3a;
+}
+.huaweiclound-footer-wrapper a>p {
+    font-size: 14px;
+    line-height: 18px;
+    color: #666a75;
+}
+
+.huaweiclound-final {
+    width: 100%;
+    height: 325px;
+    background-color: #f3f3f3;
+}
+.huaweiclound-final-left {
+    width: 242px;
+    height: 253px;
+    padding-top: 38px;
+    padding-bottom: 42px;
+    float: left;
+
+}
+.huaweiclound-final-left-box {
+    width: 242px;
+    height: 253px;
+    border-right: 1px solid #e2e2e2;
+}
+.huaweiclound-left-box-top {
+    width: 142px;
+    height: 81px;
+    /* border: 1px solid #f5f5f5; */
+
+}
+.huaweiclound-left-box-top h2{
+    margin-bottom: 12px;
+    font-size: 14px;
+    line-height: 18px;
+    color: #252b3a;
+    font-weight: normal;
+}
+.huaweiclound-left-box-top p {
+    font-size: 20px;
+    line-height: 22px;
+    color: #252b3a;
+}
+.huaweiclound-left-box-top p+p {
+    margin-top: 7px;
+}
+.huaweiclound-left-box-top ul {
+    width: 142px;
+    height: 72px;
+
+}
+.huaweiclound-left-box-top ul>li {
+    font-size: 12px;
+    line-height: 24px;
+    margin-top: 5px;
+}
+
+
+
+
+.huaweiclound-left-box-top dl>dt {
+    margin-top: 40px;
+    font-size: 14px;
+}
+.huaweiclound-fainal-right {
+    width: 983px;
+    height: 305px;
+    float: right;
+    /* width: calc(100% - 242px); */
+    padding-left: 54px;
+}
+.huaweiclound-left-box-bottom  {
+    width: 100%;
+    height: 100%;
+}
+.huaweiclound-left-box-bottom dl{
+    float: left;
+    width: 20%;
+    padding-top: 30px;
+    font-size: 14px;
+}
+.huaweiclound-left-box-bottom dt {
+    margin-bottom: 20px;
+    font-weight: 700;
+    line-height: 18px;
+    color: #252b3a;
+}
+.huaweiclound-left-box-bottom dd {
+    margin-top: 15px;
+}
